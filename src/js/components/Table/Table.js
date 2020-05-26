@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Row, Col, Table, Tr } from "reactstrap";
 import TableList, { TableHeader, TableBody, TableFoot } from "./TableList";
-import { sumValues, AddObjectProps } from "../tools/SvgComp";
+import { sumValues, AddObjectProps, ToolTip } from "../tools/SvgComp";
 
 function TableStats({ ntsa }) {
   const [total, setTotal] = useState(0);
-
+  const [tools, setTools] = useState({});
   const getSummary = (ntsa) =>
     ntsa
       .map(
@@ -20,53 +20,83 @@ function TableStats({ ntsa }) {
   useEffect(() => {
     setTotal(getSummary(ntsa));
   });
+  const getValue = (val, e) => {
+    setTools({
+      width: val.width,
+      height: val.height,
+      x: val.x,
+      y: val.y,
+      top: window.screenY,
+      left: window.screenX,
+    });
+    console.log(e.screenX, e.screenY, val.top, val.left, e);
+  };
+
   return (
-    <Table className="table table-hover table-bordered border-outline-primary  my-3">
-      <thead>
-        <tr>
-          <th className="font-weight-bold">Victim class</th>
-          <th className="font-weight-bold ">Summary</th>
-          <TableList data={ntsa} a="victimClass" TableBody={TableHeader} />
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Fatalties</td>
-          <td className="font-weight-bold">{sumValues(ntsa, "fatalties")}</td>
-
-          <TableList data={ntsa} a="fatalties" TableBody={TableBody} />
-        </tr>
-        <tr>
-          <td>Seriously Injured</td>
-          <td className="font-weight-bold">
-            {sumValues(ntsa, "seriouslyInjured")}
-          </td>
-
-          <TableList data={ntsa} a="seriouslyInjured" TableBody={TableBody} />
-        </tr>
-        <tr>
-          <td>Slightly injured</td>
-          <td className="font-weight-bold">
-            {sumValues(ntsa, "slightlyInjured")}
-          </td>
-          <TableList data={ntsa} a="slightlyInjured" TableBody={TableBody} />
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td className="font-weight-bold">Total</td>
-          <td className="purple darken-1 text-white text-lg">
-            {total.toLocaleString()}
-          </td>
-          <TableFoot data={ntsa} a="pedestrians" />
-          <TableFoot data={ntsa} a="passengers" />
-          <TableFoot data={ntsa} a="motor_cyclists" />
-          <TableFoot data={ntsa} a="drivers" />
-          <TableFoot data={ntsa} a="pillion_passengers" />
-          <TableFoot data={ntsa} a="pedal_cyclists" />
-        </tr>
-      </tfoot>
-    </Table>
+    <>
+      <ToolTip tools={tools} />
+      <Table className="table table-hover table-bordered border-outline-primary  my-3">
+        <thead>
+          <tr>
+            <th className="font-weight-bold">Victim class</th>
+            <th className="font-weight-bold ">Summary</th>
+            <TableList
+              data={ntsa}
+              a="victimClass"
+              sendValue={getValue}
+              TableBody={TableHeader}
+            />
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fatalties</td>
+            <td className="font-weight-bold">{sumValues(ntsa, "fatalties")}</td>
+            <TableList
+              data={ntsa}
+              a="fatalties"
+              sendValue={getValue}
+              TableBody={TableBody}
+            />
+          </tr>
+          <tr>
+            <td>Seriously Injured</td>
+            <td className="font-weight-bold">
+              {sumValues(ntsa, "seriouslyInjured")}
+            </td>
+            <TableList
+              data={ntsa}
+              a="seriouslyInjured"
+              sendValue={getValue}
+              TableBody={TableBody}
+            />
+          </tr>
+          <tr>
+            <td>Slightly injured</td>
+            <td className="font-weight-bold">
+              {sumValues(ntsa, "slightlyInjured")}
+            </td>
+            <TableList
+              data={ntsa}
+              a="slightlyInjured"
+              sendValue={getValue}
+              TableBody={TableBody}
+            />
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td className="font-weight-bold">Total</td>
+            <td className="purple darken-1 text-white text-lg">
+              {total.toLocaleString()}
+            </td>
+            {ntsa.map((nt, i) => (
+              <TableFoot key={i} data={ntsa} a={nt["victimClass"]} />
+            ))}
+          </tr>
+        </tfoot>
+      </Table>
+    </>
   );
 }
 export default TableStats;

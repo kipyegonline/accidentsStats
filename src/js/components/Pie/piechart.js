@@ -19,6 +19,7 @@ function NTSAPieChart({ datas, a, b }) {
     seriouslyInjured: +d.seriouslyInjured,
     addedon: new Date(d.addedon),
   }));
+
   const arc = d3
     .arc()
     .innerRadius(0)
@@ -105,7 +106,7 @@ function NTSAPieChart({ datas, a, b }) {
 
 export default NTSAPieChart;
 
-function splitEm(str) {
+export function splitEm(str) {
   if (str.indexOf("_") !== -1) {
     return str.split("_").join(" ");
   }

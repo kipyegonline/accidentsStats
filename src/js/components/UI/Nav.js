@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { hashRouter as Router, Route, NavLink as NF } from "react-router-dom";
+import { HashRouter as HRouter, Route, NavLink as NF } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Collapse,
@@ -17,37 +17,41 @@ const NavBar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">NTSA</NavbarBrand>
-      <NavbarToggler onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Nav className={`mr-auto plot`} navbar>
-          <NavItem>
-            <NF className="nav-link" to={"/"}>
-              Home
-            </NF>
-          </NavItem>
-          <NavItem>
-            {" "}
-            <NF className="nav-link" to={"/pie-view"}>
-              Pie View
-            </NF>
-          </NavItem>
-          <NavItem>
-            {" "}
-            <NF className="nav-link" to={"/line-view"}>
-              Line View
-            </NF>
-          </NavItem>
-          <NavItem>
-            {" "}
-            <NF className="nav-link" to={"/add-stats"}>
-              Add Stats
-            </NF>
-          </NavItem>
-        </Nav>
-      </Collapse>
-    </Navbar>
+    <HRouter>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">NTSA</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Route>
+            <Nav className={`mr-auto plot`} navbar>
+              <NavItem>
+                <NF className="nav-link" to={"/"}>
+                  Home
+                </NF>
+              </NavItem>
+              <NavItem>
+                {" "}
+                <NF className="nav-link" to={"/pie-view"}>
+                  Pie View
+                </NF>
+              </NavItem>
+              <NavItem>
+                {" "}
+                <NF className="nav-link" to={"/line-view"}>
+                  Line View
+                </NF>
+              </NavItem>
+              <NavItem>
+                {" "}
+                <NF className="nav-link" to={"/add-stats"}>
+                  Add Stats
+                </NF>
+              </NavItem>
+            </Nav>
+          </Route>
+        </Collapse>
+      </Navbar>
+    </HRouter>
   );
 };
 

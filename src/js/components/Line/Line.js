@@ -4,10 +4,17 @@ import { Row, Col } from "reactstrap";
 import { Slider } from "@material-ui/core";
 import Layout from "../UI/Layout";
 import LineChart from "./lineCharts";
+import { InjurySection } from "../Pie/Pie";
+const injuryClasses = [
+  { id: 1, name: "fatalties", val: "fatalties", clicked: true },
+  { id: 2, name: "Seriously injured", val: "seriouslyInjured", clicked: false },
+  { id: 3, name: "Slightly injured", val: "slightlyInjured", clicked: false },
+];
 
 function NTSALine() {
-  const [selectedClass, setSelectedClass] = useState("pedestrians");
+  const [selectedClass, setSelectedClass] = useState("fatalties");
   const [slid, setSlid] = useState(5);
+  const [iClass, setIclass] = useState(injuryClasses);
   const vclasses = [
     "pedestrians",
     "motor_cyclists",
@@ -16,7 +23,17 @@ function NTSALine() {
     "drivers",
     "pedal_cyclists",
   ];
-  const { ntsa, iclass, ntsb, loadedA, loadedB } = useSelector((state) => ({
+
+  const getValue = (val) => {
+    const clicked = iClass.find((ic) => ic.id === +val);
+    setSelectedClass(clicked.val);
+    setIclass(
+      iClass.map((ic) =>
+        ic.id === +val ? { ...ic, clicked: true } : { ...ic, clicked: false }
+      )
+    );
+  };
+  const { ntsa, ntsb, loadedA, loadedB } = useSelector((state) => ({
     ntsa: state.ntsa,
     ntsb: state.ntsb,
     iclass: state.iclass,
@@ -25,12 +42,23 @@ function NTSALine() {
   }));
 
   const fixData = (data, id) => data.filter((d) => d.victimClass === id);
-  const main = vclasses.map((vc) => fixData(ntsa, vc));
-  const mainB = vclasses.map((vc) => fixData(ntsb, vc));
+  let main = vclasses.map((vc) => fixData(ntsa, vc));
+  let mainB = vclasses.map((vc) => fixData(ntsb, vc));
 
   const handleChange = (e, num) => setSlid(+num);
+  //a helper to arrange inner arrays; go through each top array
+  const arrangeData = (data) =>
+    data.length ? data.map((d) => arrangeInnerData(d)) : [];
+  const arrangeInnerData = (data) => {
+    if (data.length) {
+      //i will use rank to sort victim classes
+      data[0].rank = data.reduce((a, b) => (a += Number(b[selectedClass])), 0);
+      return data;
+    }
+  };
 
-  console.log("why her", loadedA, mainB);
+  main = arrangeData(main);
+  mainB = arrangeData(mainB);
 
   return (
     <Layout>
@@ -50,30 +78,35 @@ function NTSALine() {
           {" "}
           {loadedA && loadedB > 0 ? (
             <LineChart
-              datam={main.slice(0, 5)}
+              datam={main}
               c="lxgrp"
               d="lygrp"
               a={"addedon"}
-              b={"seriouslyInjured"}
+              b={selectedClass}
             />
           ) : (
-            <p>Loading</p>
+            <p>Loading Chart</p>
           )}
         </Col>
         <Col>
           {" "}
           {loadedA && loadedB > 0 ? (
             <LineChart
-              datam={mainB.slice(0, 4)}
+              datam={mainB}
               c="l2xgrp"
               d="l2ygrp"
               a={"addedon"}
-              b={"seriouslyInjured"}
+              b={selectedClass}
             />
           ) : (
             <p>Loading</p>
           )}
         </Col>
+        <Row className="my-3">
+          <Col>
+            <InjurySection data={iClass} sendValue={getValue} />
+          </Col>
+        </Row>
       </Row>
     </Layout>
   );

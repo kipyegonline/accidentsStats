@@ -1,8 +1,10 @@
 import React from "react";
 import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { SVG, Group } from "./SvgComp";
-import { interpolate } from "d3";
+import { SVG, Group, Rect, Text, Circle, Path } from "./SvgComp";
+
+import { data } from "../../__tests__/table.test";
+
 Enzyme.configure({ adapter: new Adapter() });
 
 //svg comp
@@ -10,16 +12,17 @@ describe("<SVG/> component", () => {
   const wrapper = shallow(
     <SVG height={100} bg="#111" width={200} classlist="svg" />
   );
+
   it("exists", () => expect(wrapper.hasClass("svg")).toBeTruthy());
   it("has props", () =>
     expect(wrapper.props()).toEqual({
       height: 100,
       width: 200,
+      strokeWidth: 1,
       style: { background: "#111" },
       className: "svg",
-      stroke: "",
+      stroke: "none",
       children: "",
-      strokeWidth: 0,
     }));
 });
 
@@ -28,6 +31,7 @@ describe("<Group/> component", () => {
   const wrapper = shallow(
     <Group x={100} y={200} gh={480} gw={400} fill={"grey"} classlist="group" />
   );
+
   it("renders", () => expect(wrapper.find("g")).toHaveLength(1));
   it("Has props", () =>
     expect(wrapper.props()).toEqual({
@@ -38,5 +42,183 @@ describe("<Group/> component", () => {
       fill: "grey",
       className: "group",
       shapeRendering: "auto",
+    }));
+});
+//Rect
+describe("<Rect/> component", () => {
+  const hc = jest.fn(),
+    hh = jest.fn(),
+    hl = jest.fn();
+  const wrapper = shallow(
+    <Rect
+      x={50}
+      y={100}
+      width={20}
+      height={40}
+      fill="grey"
+      opacity={0.7}
+      style={{ fontSize: "1rem", fontFamily: "raleway" }}
+      classlist="rect"
+      stroke="none"
+      strokew={1}
+      hc={hc}
+      hl={hl}
+      hh={hh}
+    />
+  );
+
+  describe("renders the UI", () => {
+    it("renders a rect componet", () =>
+      expect(wrapper.find(".rect")).toHaveLength(1));
+  });
+  it("has props", () =>
+    expect(wrapper.props()).toEqual({
+      x: 50,
+      onClick: hc,
+      onMouseEnter: hh,
+      onMouseOver: hh,
+      onMouseLeave: hl,
+      y: 100,
+      width: 20,
+      height: 40,
+      fill: "grey",
+      opacity: 0.7,
+      style: { fontSize: "1rem", fontFamily: "raleway" },
+      className: "rect",
+      shapeRendering: "crispEdges",
+      stroke: "none",
+      strokeWidth: 1,
+    }));
+  test(" mouse over event", () => {
+    wrapper.simulate("mouseover");
+    expect(hh).toHaveBeenCalled();
+    expect(hh).toHaveBeenCalledTimes(1);
+  });
+  test(" mouse leave event", () => {
+    wrapper.simulate("mouseleave");
+    expect(hl).toHaveBeenCalledTimes(1);
+    expect(hl).toHaveBeenCalled();
+  });
+  test(" click event", () => {
+    wrapper.simulate("click");
+    expect(hl).toHaveBeenCalledTimes(1);
+    expect(hl).toHaveBeenCalled();
+  });
+});
+
+//TEXT component
+describe("<TEXT/> component", () => {
+  const wrapper = shallow(
+    <Text
+      x={30}
+      y={60}
+      transformer={0}
+      fw="normal"
+      fz="2rem"
+      TA="middle"
+      fill="teal"
+      classlist="text"
+      style={{ fontStyle: "italic" }}
+    >
+      Say Ahh
+    </Text>
+  );
+
+  describe("Renders UI", () => {
+    it("exists", () => expect(wrapper.find(".text").exists()).toBeTruthy());
+    it("has some children", () => expect(wrapper.text()).toBe("Say Ahh"));
+
+    it("has the damn props", () =>
+      expect(wrapper.props()).toEqual({
+        x: 30,
+        y: 60,
+        pointerEvents: "none",
+        transform: `translate(0)`,
+        children: "Say Ahh",
+        fontWeight: "normal",
+        fill: "teal",
+        fontSize: "2rem",
+        textAnchor: "middle",
+        className: "text",
+        style: { fontStyle: "italic" },
+      }));
+  });
+});
+
+describe("<Circle/>", () => {
+  const hh = jest.fn(),
+    hl = jest.fn();
+  const wrapper = shallow(
+    <Circle
+      cx={100}
+      cy={70}
+      r={40}
+      fill="skyblue"
+      opacity={1}
+      classlist="circle"
+      hh={hh}
+      hl={hl}
+    >
+      <Text x={30} y={70}>
+        Welcome to the blue story
+      </Text>
+    </Circle>
+  );
+  test("That it renders", () =>
+    expect(wrapper.find(".circle").exists()).toBeTruthy());
+  test.skip("The circle props", () =>
+    expect(wrapper.props()).toEqual({
+      cx: 100,
+      cy: 70,
+      r: 40,
+      fill: "skyblue",
+      opacity: 1,
+      className: "circle",
+      onMouseEnter: hh,
+      onMouseLeave: hl,
+      onMouseOver: hh,
+      stroke: "none",
+      strokeWidth: 2,
+      strokeDashArray: 0,
+      shapeRendering: "auto",
+      children: "<text>Welcome to the blue story</text>", //plus everything up there
+    }));
+  test("Mouse events", () => {
+    wrapper.simulate("mouseover");
+    expect(hh).toHaveBeenCalled();
+    expect(hh).toHaveBeenCalledTimes(1);
+    wrapper.simulate("mouseleave");
+    expect(hl).toHaveBeenCalled();
+    expect(hl).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("<Path/>", () => {
+  const hh = jest.fn(),
+    hl = jest.fn();
+  const wrapper = shallow(
+    <Path
+      d="SOME FUNNY PATH STRING TO BE GENERATED BY D# LINE METHOD"
+      stroke="red"
+      strokew={3}
+      fill="#fff"
+      hh={hh}
+      hl={hl}
+      classlist="path"
+      opacity={1}
+    />
+  );
+  it("exists", () => expect(wrapper.find(".path").exists()).toBeTruthy());
+  it("renders the damn props....", () =>
+    expect(wrapper.props()).toEqual({
+      d: "SOME FUNNY PATH STRING TO BE GENERATED BY D# LINE METHOD",
+      stroke: "red",
+      strokeWidth: 3,
+      fill: "#fff",
+      onMouseLeave: hl,
+      onMouseOver: hh,
+      shapeRendering: "auto",
+      className: "path",
+      opacity: 1,
     }));
 });

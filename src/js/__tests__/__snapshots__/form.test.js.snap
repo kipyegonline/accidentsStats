@@ -1,0 +1,393 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddStatsForm/> Tje form renders the UI Matches snapshot 1`] = `
+<form
+  className=""
+  onSubmit={[Function]}
+  style={
+    Object {
+      "background": "#fff",
+      "border": "1px solid yellow",
+      "margin": "1rem auto",
+      "maxWidth": 600,
+      "padding": "2rem",
+      "zIndex": 10,
+    }
+  }
+>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <p
+        className="text-info text-center"
+      >
+        Await
+      </p>
+    </div>
+  </FormGroup>
+  <div
+    className="float-right"
+  >
+    <button
+      className="btn blue darken-2 btn-md text-white year-btn"
+      onClick={[Function]}
+      style={
+        Object {
+          "fontSize": "1rem",
+        }
+      }
+      type="button"
+    >
+      2020
+    </button>
+  </div>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        for="selectClass"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="selectClass"
+        >
+          Select Victim class
+        </label>
+      </Label>
+      <ClassSelect
+        data={
+          Array [
+            Object {
+              "id": 1,
+              "name": "pedestrians",
+            },
+            Object {
+              "id": 2,
+              "name": "Drivers",
+            },
+            Object {
+              "id": 3,
+              "name": "passengers",
+            },
+            Object {
+              "id": 4,
+              "name": "Pillion pass",
+            },
+            Object {
+              "id": 5,
+              "name": "pedal Cyclist",
+            },
+            Object {
+              "id": 6,
+              "name": "Motor cyclists",
+            },
+          ]
+        }
+        getValue={[Function]}
+        selected={0}
+      >
+        <select
+          className="form-control"
+          id="selectClass"
+          onChange={[Function]}
+          value={0}
+        >
+          <option
+            value={0}
+          >
+            Select Victim class
+          </option>
+          <option
+            key="1"
+            value={1}
+          >
+            pedestrians
+          </option>
+          <option
+            key="2"
+            value={2}
+          >
+            Drivers
+          </option>
+          <option
+            key="3"
+            value={3}
+          >
+            passengers
+          </option>
+          <option
+            key="4"
+            value={4}
+          >
+            Pillion pass
+          </option>
+          <option
+            key="5"
+            value={5}
+          >
+            pedal Cyclist
+          </option>
+          <option
+            key="6"
+            value={6}
+          >
+            Motor cyclists
+          </option>
+        </select>
+      </ClassSelect>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        for="fatalties"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="fatalties"
+        >
+          Fatalities
+        </label>
+      </Label>
+      <DataInput
+        id="fatalities"
+        name="Fatalties"
+        placeholder=""
+        sendValue={[Function]}
+        type="text"
+      >
+        <Input
+          className="form-control"
+          id="fatalities"
+          name="Fatalties"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="text"
+        >
+          <input
+            className="form-control form-control"
+            id="fatalities"
+            name="Fatalties"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="text"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        for="seriousInjuries"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="seriousInjuries"
+        >
+          Seriously Injured
+        </label>
+      </Label>
+      <DataInput
+        id="seriousInjuries"
+        name="SeriousInjuries"
+        placeholder=""
+        sendValue={[Function]}
+        type="text"
+      >
+        <Input
+          className="form-control"
+          id="seriousInjuries"
+          name="SeriousInjuries"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="text"
+        >
+          <input
+            className="form-control form-control"
+            id="seriousInjuries"
+            name="SeriousInjuries"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="text"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        htmlFor="slightInjuries"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="slightInjuries"
+        >
+          Slightly Injured
+        </label>
+      </Label>
+      <DataInput
+        id="slightInjuries"
+        name="SlightInjuries"
+        placeholder=""
+        sendValue={[Function]}
+        type="text"
+      >
+        <Input
+          className="form-control"
+          id="slightInjuries"
+          name="SlightInjuries"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="text"
+        >
+          <input
+            className="form-control form-control"
+            id="slightInjuries"
+            name="SlightInjuries"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="text"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        htmlFor="Date"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="Date"
+        >
+          Date
+        </label>
+      </Label>
+      <DataInput
+        id="date"
+        name="Date"
+        placeholder=""
+        sendValue={[Function]}
+        type="date"
+      >
+        <Input
+          className="form-control"
+          id="date"
+          name="Date"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="date"
+        >
+          <input
+            className="form-control form-control"
+            id="date"
+            name="Date"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="date"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <Button
+    className="blue lighten-2 btn-block"
+    color="secondary"
+    tag="button"
+  >
+    <button
+      aria-label={null}
+      className="blue lighten-2 btn-block btn btn-secondary"
+      onClick={[Function]}
+    >
+      Submit
+    </button>
+  </Button>
+  <p
+    className="text-danger mt-2"
+  />
+</form>
+`;

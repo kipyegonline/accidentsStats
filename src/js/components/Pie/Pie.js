@@ -74,7 +74,7 @@ function NTSAPie() {
           {loadedA && loadedB ? (
             <NTSAPieChart datas={main[slid]} a={currentClass} b="victimClass" />
           ) : (
-            <p>Loading</p>
+            <p>Loading chart</p>
           )}
         </Col>
       </Row>

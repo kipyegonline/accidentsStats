@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TableList/> renders 1`] = `"<table><tbody><tr><td class=\\"drivers-fatalties-2020\\">345</td><td class=\\"pillion_passengers-fatalties-2020\\">245</td><td class=\\"pedestrians-fatalties-2020\\">445</td></tr></tbody></table>"`;

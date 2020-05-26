@@ -24,6 +24,18 @@ const ntb = require("../assets/ntsb.csv");
 d3.csv(nt).then((res) => {
   store.dispatch({ type: "ADD_NTSA", payload: res });
 });
+const fetchData = async (url, type) => {
+  const res = await fetch(url);
+  if (res.status) {
+    const data = await res.json();
+    if (data) {
+      store.dispatch({ type, payload: data });
+      localStorage.setItem(type, JSON.stringify(res));
+    } else {
+      console.error("Error fetching data from the server", res);
+    }
+  }
+};
 
 function App() {
   return (
@@ -57,3 +69,14 @@ const getCSVData = async (file, type) => {
   store.dispatch({ type, payload: res });
 };
 Promise.all([getCSVData(nt, "ADD_NTSA"), getCSVData(ntb, "ADD_NTSB")]);
+let url1 = "./server/addstats.php?fetchStats=true&tableName=victimsCases";
+let url2 = "./server/addstats.php?fetchStats=true&tableName=victimsCases2019";
+Promise.all([fetchData(url1, "ADD_NTSA"), fetchData(url2, "ADD_NTSB")]);
+
+$.ajax({
+  type: "GET",
+  url: url1,
+  dataType: "json",
+})
+  .then((res) => console.log(res, "resss"))
+  .catch((err) => console.error("errr", err));

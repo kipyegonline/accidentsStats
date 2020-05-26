@@ -34,9 +34,24 @@ justify-content:center;
 align-items:center;
 background:#ddd;
 }
+.purple{
+  font-size:2rem;
+  transition:all .25s linear;
+  text-align:center;
+}
 
 svg{
   z-index:10;
+}
+circle{
+  opacity:1;
+}
+circle:hover{
+  mouse:pointer;
+  opacity:1;
+  z-index:10;
+  pointer-events:none;
+  fill:red;
 }
 @media (max-width:480px){
   .plot{

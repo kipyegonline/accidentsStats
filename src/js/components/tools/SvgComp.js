@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 //SVG component
 export const SVG = ({
@@ -35,8 +36,8 @@ SVG.defaultProps = {
   bg: "#ddd",
   children: "",
   classlist: "",
-  strokew: 0,
-  stroke: "",
+  strokew: 1,
+  stroke: "none",
 };
 
 //Group component
@@ -61,9 +62,10 @@ Group.propTypes = {
   children: PropTypes.node,
   classlist: PropTypes.string,
 };
+
 Group.defaultProps = {
   classlist: "",
-  fill: "black",
+  fill: "none",
   children: "",
 };
 
@@ -80,11 +82,14 @@ export const Rect = ({
   width,
   opacity,
   style,
+  stroke,
+  strokew,
 }) => (
   <rect
     x={x}
     onClick={hc}
     onMouseOver={hh}
+    onMouseEnter={hh}
     onMouseLeave={hl}
     y={y}
     shapeRendering="crispEdges"
@@ -93,6 +98,8 @@ export const Rect = ({
     opacity={opacity}
     fill={fill}
     style={style}
+    stroke={stroke}
+    strokeWidth={strokew}
     className={classlist}
   ></rect>
 );
@@ -109,6 +116,8 @@ Rect.propTypes = {
   fill: PropTypes.string,
   classlist: PropTypes.string,
   opacity: PropTypes.number,
+  stroke: PropTypes.string,
+  strokew: PropTypes.number,
 };
 
 Rect.defaultProps = {
@@ -116,6 +125,8 @@ Rect.defaultProps = {
   classlist: "",
   opacity: 1,
   style: {},
+  strokew: 1,
+  stroke: "none",
   hc: (f) => f,
   hh: (f) => f,
   hl: (f) => f,
@@ -131,17 +142,21 @@ export const Text = ({
   fz,
   TA,
   fw,
+  style,
+  fill,
 }) => {
   return (
     <text
       x={x}
       y={y}
+      pointerEvents="none"
       textAnchor={TA}
       fontSize={fz}
       fontWeight={fw}
-      fill="black"
+      fill={fill}
       transform={`translate(${transformer})`}
       className={classlist}
+      style={style}
     >
       {children}
     </text>
@@ -154,10 +169,11 @@ Text.propTypes = {
   fz: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   fw: PropTypes.string,
   fill: PropTypes.string,
-  transform: PropTypes.number,
   classlist: PropTypes.string,
+
   children: PropTypes.node,
-  transformer: PropTypes.any,
+  transformer: PropTypes.any, //oneOfType([PropTypes.number, PropTypes.string]),
+  style: PropTypes.object,
 };
 
 Text.defaultProps = {
@@ -200,6 +216,7 @@ Path.propTypes = {
   opacity: PropTypes.number,
   classlist: PropTypes.string,
 };
+
 Path.defaultProps = {
   hh: (f) => f,
   hl: (f) => f,
@@ -231,6 +248,7 @@ export const Circle = ({
     r={r}
     shapeRendering="auto"
     fill={fill}
+    onMouseEnter={hh}
     onMouseOver={hh}
     opacity={opacity}
     strokeWidth={strokew}
@@ -248,7 +266,7 @@ Circle.propTypes = {
   cx: PropTypes.number.isRequired,
   cy: PropTypes.number.isRequired,
   r: PropTypes.number.isRequired,
-  strokew: PropTypes.width,
+  strokew: PropTypes.number,
   dash: PropTypes.number,
   opacity: PropTypes.number,
   fill: PropTypes.string,
@@ -260,8 +278,9 @@ Circle.defaultProps = {
   hh: (f) => f,
   hl: (f) => f,
   fill: "black",
+  dash: 0,
   opacity: 1,
-  stroke: "",
+  stroke: "none",
   strokew: 2,
   classlist: "",
   children: "",
@@ -297,3 +316,25 @@ export const months = [
   "November",
   "December",
 ];
+
+export const ToolTip = styled.div`
+width:${(props) => props.tools.width || 0}px;
+height:100px;;
+z:index:100;
+position:absolute;
+padding:1rem;
+margin:${(props) => console.log("till", props)};
+line-height:1em;
+top:${(props) => props.tools.top || 0}px;
+left:${(props) => props.tools.left || 0}px;
+opacity:${(props) => props.opacity || 1};
+background:deepskyblue;
+
+@media(max-width:380px){
+  width:${(props) => props.tools.w};
+  top:${(props) => props.tools.top};
+left:${(props) => props.tools.left};
+background:yellow;
+}
+
+`;

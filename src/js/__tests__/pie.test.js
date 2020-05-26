@@ -34,12 +34,7 @@ describe("<NTSAPie/>", () => {
       <NTSAPieChart datas={data} a="fatalties" b="victimClass" />
     </MockStore>
   );
-  console.log(
-    wrapper
-      .find("rect")
-      .at(1)
-      .debug()
-  );
+
   describe("SVG", () => {
     it("counts paths", () => expect(wrapper.find("path")).toHaveLength(3));
     it("counts groups", () => expect(wrapper.find("g")).toHaveLength(4));

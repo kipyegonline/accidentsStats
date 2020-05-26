@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled, { createGlobalStyle } from "styled-components";
 import { Row, Col } from "reactstrap";
+import PropTypes from "prop-types";
 import * as d3 from "d3";
 import TableStats from "./Table/Table";
 import Layout from "./UI/Layout";
@@ -9,6 +10,7 @@ import { months } from "./tools/SvgComp";
 
 function Main() {
   const [selected, setSelected] = useState(0);
+
   const data = useSelector((state) => {
     return {
       ntsa: state.ntsa,
@@ -17,6 +19,7 @@ function Main() {
       loadedB: state.loadedB,
     };
   });
+
   const fixData = (data) => {
     let main = [];
     for (let i = 0; i < data.length; i += 6) {
@@ -25,25 +28,23 @@ function Main() {
 
     return main;
   };
+
   const main = fixData(data.ntsa);
   const mainB = fixData(data.ntsb);
   const getValue = (val) => setSelected(val);
   let month = "";
-
-  if (data.loadedA && data.loadedB) {
-    month = main[selected][0].addedon;
-    month = new Date(month).toDateString();
-  }
 
   return (
     <Layout>
       <Row className="my-3">
         <Row className="mt-5">
           <Col>
-            <SelectedMonth data={main} sendValue={getValue} />
+            {data.loadedA && data.loadedB ? (
+              <SelectedMonth data={main} sendValue={getValue} />
+            ) : null}
           </Col>
         </Row>
-        <Col>
+        <Col className="position-relative">
           <p>
             COMPARATIVE STATISTICS TRENDS FOR 2019 AND 2020 AS AT {"  "}
             <span className="text-info">
@@ -57,7 +58,7 @@ function Main() {
             <p>Loading</p>
           )}
         </Col>
-        <Col>
+        <Col className="position-relative">
           <p>
             COMPARATIVE STATISTICS TRENDS FOR 2019 AND 2020 {"  "}
             <span className="text-info">
@@ -76,23 +77,28 @@ function Main() {
   );
 }
 export default Main;
-const SelectedMonth = ({ data, sendValue }) => {
-  const [month, setMonth] = useState(-1);
+
+export const SelectedMonth = ({ data, sendValue }) => {
+  const [month, setMonth] = useState(data.length - 1);
 
   const getMonth = (d) => new Date(d).getMonth();
   const handleChange = (d) => {
-    if (+d >= 0) {
-      sendValue(+d);
-      setMonth(getMonth(data[+d].addedon));
+    if (d >= 0) {
+      sendValue(d);
+
+      setMonth(d);
     }
   };
+  useEffect(() => {
+    sendValue(month);
+  }, []);
+
   return (
     <select
       className="form-control"
-      onChange={(e) => handleChange(e.target.value)}
-      value={months[month]}
+      onChange={(e) => handleChange(Number(e.target.value))}
+      value={month}
     >
-      <option value={-1}>Select Month</option>
       {data.map((d, i) => (
         <option key={i} value={i}>
           {months[getMonth(d[0].addedon)]}
@@ -100,4 +106,8 @@ const SelectedMonth = ({ data, sendValue }) => {
       ))}
     </select>
   );
+};
+SelectedMonth.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.array),
+  sendValue: PropTypes.func,
 };
