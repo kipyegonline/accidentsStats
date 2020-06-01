@@ -32,7 +32,17 @@ function Main() {
   const main = fixData(data.ntsa);
   const mainB = fixData(data.ntsb);
   const getValue = (val) => setSelected(val);
-  let month = "";
+
+  let month = "",
+    month2 = "";
+  if (data.loadedA && data.loadedB) {
+    month = new Date(main[selected][0].addedon).toDateString();
+    month2 = new Date(mainB[selected][0].addedon).toDateString();
+  }
+  /*
+    data.length > 0 !== undefined
+      ? new Date(data[0].addedon).toDateString()
+      : "";*/
 
   return (
     <Layout>
@@ -47,10 +57,7 @@ function Main() {
         <Col className="position-relative">
           <p>
             COMPARATIVE STATISTICS TRENDS FOR 2019 AND 2020 AS AT {"  "}
-            <span className="text-info">
-              {" "}
-              {month === "Invalid Date" ? "" : month}{" "}
-            </span>
+            <span className="text-info"> {month} </span>
           </p>
           {data.loadedA && data.loadedB ? (
             <TableStats ntsa={main[selected]} />
@@ -61,10 +68,7 @@ function Main() {
         <Col className="position-relative">
           <p>
             COMPARATIVE STATISTICS TRENDS FOR 2019 AND 2020 {"  "}
-            <span className="text-info">
-              {" "}
-              {month === "Invalid Date" ? "" : month}{" "}
-            </span>
+            <span className="text-info"> {month2} </span>
           </p>
           {data.loadedA && data.loadedB ? (
             <TableStats ntsa={mainB[selected]} />

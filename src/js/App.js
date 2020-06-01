@@ -16,7 +16,8 @@ import NTSALine from "./components/Line/Line";
 import NotFound from "./components/UI/NotFound";
 import AddStats from "./components/AddStats/addstats";
 import { store } from "./redux/store";
-
+import Login from "./components/auth/login";
+import SignUp from "./components/auth/signup";
 const nt = require("../assets/ntsa.csv");
 const ntb = require("../assets/ntsb.csv");
 //extract dta from csv and dispatch data to redux store
@@ -43,10 +44,12 @@ function App() {
       <Container>
         <Router>
           <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/pie-view" component={NTSAPie} />
-            <Route path="/line-view" component={NTSALine} />
+            <Route exact path="/" component={NTSAPie} />
+            <Route path="/timeline" component={NTSALine} />
+            <Route path="/summary-statistics" component={Main} />
             <Route path="/add-stats" component={AddStats} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
             <Route component={NotFound} />
           </Switch>
         </Router>

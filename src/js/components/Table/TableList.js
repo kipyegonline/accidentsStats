@@ -24,10 +24,13 @@ TableList.propTypes = {
 export const TableBody = ({ name, classlist, yoda, sendValue }) => {
   //get the object property name
   const objectClass = Object.entries(yoda).find((item) => item[1] === name);
-  //concatenate the object name, victim class and year
-  classlist = `${classlist}-${objectClass[0]}-${new Date(
-    yoda.addedon
-  ).getFullYear()}`;
+
+  //concatenate the object name, victim class and yearif
+  if (objectClass) {
+    classlist = `${classlist}-${objectClass[0]}-${new Date(
+      yoda.addedon
+    ).getFullYear()}`;
+  }
 
   const handleMouseEnter = (e, data) => {
     const year = getYear(data.addedon);

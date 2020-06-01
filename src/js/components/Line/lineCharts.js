@@ -189,7 +189,7 @@ const CirclePath = ({ d, a, b }) => {
 const LastText = ({ d, a, b }) => {
   let x = xScale(d[d.length - 1][a]);
   let y = yScale(d[d.length - 1][b]);
-  console.log(x, y, d[d.length - 1]);
+
   return (
     <Text x={x - 10} y={y + 20} fw="bold" fill="black">
       {d[d.length - 1][b] > 1e3

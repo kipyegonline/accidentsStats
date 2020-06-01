@@ -11,6 +11,7 @@ export const SVG = ({
   classlist,
   stroke,
   strokew,
+  position,
 }) => (
   <svg
     height={height}
@@ -31,6 +32,7 @@ SVG.propTypes = {
   classlist: PropTypes.string,
   stroke: PropTypes.string,
   strokew: PropTypes.number,
+  position: PropTypes.string,
 };
 SVG.defaultProps = {
   bg: "#ddd",
@@ -204,6 +206,7 @@ export const Path = ({
     onMouseLeave={hl}
     shapeRendering="auto"
     strokeWidth={strokew}
+    style={{ position: "relative", transition: "all .25s ease-in" }}
   />
 );
 Path.propTypes = {
@@ -318,23 +321,39 @@ export const months = [
 ];
 
 export const ToolTip = styled.div`
-width:${(props) => props.tools.width || 0}px;
-height:100px;;
-z:index:100;
-position:absolute;
-padding:1rem;
-margin:${(props) => console.log("till", props)};
-line-height:1em;
-top:${(props) => props.tools.top || 0}px;
-left:${(props) => props.tools.left || 0}px;
-opacity:${(props) => props.opacity || 1};
-background:deepskyblue;
+  width: ${(props) => (props.tools !== undefined ? props.tools.width : 0)}px;
+  height: 120px;
+  z-index: 100;
+  text-transform: capitalize;
+  position: absolute;
+  padding: 1rem;
+  margin: ${(props) => console.log("till", props)};
+  line-height: 1em;
+  top: ${(props) => (props.tools !== undefined ? props.tools.top : 0)}px;
+  left: ${(props) => (props.tools !== undefined ? props.tools.left : 0)}px;
+  opacity: ${(props) =>
+    props.tools.opacity !== undefined
+      ? props.tools.opacity == true
+        ? 1
+        : 0
+      : 0};
+  background: white;
+  transform: translate(
+    ${(props) => props.tools.left},
+    ${(props) => props.tools.top}
+  );
 
-@media(max-width:380px){
-  width:${(props) => props.tools.w};
-  top:${(props) => props.tools.top};
-left:${(props) => props.tools.left};
-background:yellow;
-}
+  @media (max-width: 380px) {
+    width: ${(props) => (props.tools !== undefined ? props.tools.width : 0)};
+    top: ${(props) => (props.tools !== undefined ? props.tools.top : 0)};
+    left: ${(props) => (props.tools !== undefined ? props.tools.left : 0)};
+    background: yellow;
+  }
+`;
+export const Ptip = styled.p`
+  margin: 0;
+  padding: 0.25rem 0;
+  font-size: 1rem;
 
+  line-height: 1em;
 `;

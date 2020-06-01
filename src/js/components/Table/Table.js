@@ -29,13 +29,12 @@ function TableStats({ ntsa }) {
       top: window.screenY,
       left: window.screenX,
     });
-    console.log(e.screenX, e.screenY, val.top, val.left, e);
   };
 
   return (
     <>
       <ToolTip tools={tools} />
-      <Table className="table table-hover table-bordered border-outline-primary  my-3">
+      <Table className="table table-hover table-bordered border-outline-primary  position-relative my-3">
         <thead>
           <tr>
             <th className="font-weight-bold">Victim class</th>
@@ -100,3 +99,11 @@ function TableStats({ ntsa }) {
   );
 }
 export default TableStats;
+
+let name = "sheeila";
+let newName = "";
+for (let i = 0; i < name.length; i++) {
+  for (let j = 0; j < name.length; j++) {
+    //console.log(name[i], "\n", name[j]);
+  }
+}

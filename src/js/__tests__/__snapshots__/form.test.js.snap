@@ -28,22 +28,27 @@ exports[`<AddStatsForm/> Tje form renders the UI Matches snapshot 1`] = `
       </p>
     </div>
   </FormGroup>
-  <div
-    className="float-right"
+  <YearBtn
+    sendValue={[Function]}
+    year={false}
   >
-    <button
-      className="btn blue darken-2 btn-md text-white year-btn"
-      onClick={[Function]}
-      style={
-        Object {
-          "fontSize": "1rem",
-        }
-      }
-      type="button"
+    <div
+      className="float-right"
     >
-      2020
-    </button>
-  </div>
+      <button
+        className="blue btn darken-1 btn-md text-white year-btn"
+        onClick={[Function]}
+        style={
+          Object {
+            "fontSize": "1rem",
+          }
+        }
+        type="button"
+      >
+        2020
+      </button>
+    </div>
+  </YearBtn>
   <FormGroup
     tag="div"
   >

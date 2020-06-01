@@ -220,5 +220,6 @@ describe("<Path/>", () => {
       shapeRendering: "auto",
       className: "path",
       opacity: 1,
+      style: { position: "relative", transition: "all .25s ease-in" },
     }));
 });

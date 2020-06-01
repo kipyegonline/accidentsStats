@@ -64,6 +64,7 @@ function NTSAPie() {
               datas={mainB[slid]}
               a={currentClass}
               b="victimClass"
+              diff={main[slid]}
             />
           ) : (
             <p>Loading</p>
@@ -72,7 +73,12 @@ function NTSAPie() {
 
         <Col>
           {loadedA && loadedB ? (
-            <NTSAPieChart datas={main[slid]} a={currentClass} b="victimClass" />
+            <NTSAPieChart
+              datas={main[slid]}
+              a={currentClass}
+              b="victimClass"
+              diff={mainB[slid]}
+            />
           ) : (
             <p>Loading chart</p>
           )}

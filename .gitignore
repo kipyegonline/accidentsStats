@@ -1,3 +1,5 @@
 /node_modules
 /public
 /coverage
+/public.zip
+/server/auth.php

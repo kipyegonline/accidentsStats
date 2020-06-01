@@ -6,8 +6,8 @@ import AddStats, {
   ClassSelect,
   addClass,
   DataInput,
+  YearBtn,
 } from "../components/AddStats/addstats";
-import { interpolate } from "d3";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -21,31 +21,19 @@ describe("<AddStatsForm/>", () => {
     //3 not 2 since i also mounted a button from the navbar
     it("has 2 buttons", () => expect(wrapper.find("button")).toHaveLength(3));
   });
-  it("The year button does the right thing", () => {
-    //text
-    expect(wrapper.find(".year-btn").text()).toBe("2020");
-    //props
-    const toggleYear = () => console.log("Mock");
-    expect(wrapper.find(".year-btn").props()).toEqual({
-      type: "button",
-      children: "2020",
-      className: "btn blue darken-2 btn-md text-white year-btn",
-      onClick: toggleYear,
-      style: { fontSize: "1rem" },
-    });
-
-    //click event
-    let ybtn = wrapper.find(".year-btn");
-    ybtn.simulate("click");
-    expect(
-      wrapper
-        .find("button")
-        .at(1)
-        .text()
-    ).toBe("2010");
-  });
-
   //the paragraphs
+  it("has 2 p tags", () => {
+    expect(wrapper.find("p").length).toEqual(2);
+  });
+  it("submits the form unsuccessfully", () => {
+    let form = wrapper.find("form");
+    form.simulate("submit");
+    //set the props as we move on
+    wrapper.setProps({ classv: 1 });
+    expect(wrapper.find("p.text-danger").text()).toBe(
+      "Please select victim class"
+    );
+  });
 });
 describe("<Input/> component", () => {
   const _sendValue = jest.fn();
@@ -83,6 +71,7 @@ describe("<Input/> component", () => {
   });
   // click and change eventevent
 });
+
 describe("<ClassSelect/>", () => {
   const _getValue = jest.fn();
   const wrapper = mount(
@@ -124,5 +113,33 @@ describe("<ClassSelect/>", () => {
     expect(_getValue).toBeCalled();
     expect(_getValue).toBeCalledTimes(1);
     expect(_getValue).toBeCalledWith(1);
+  });
+});
+//Button
+describe("<YearBtn/>", () => {
+  const _sendValue = jest.fn();
+  const wrapper = shallow(<YearBtn year sendValue={_sendValue} />);
+
+  it("The year button does the right thing", () => {
+    //text
+    expect(wrapper.find(".year-btn").text()).toBe("2019");
+    //props
+    /** 
+    expect(wrapper.find(".year-btn").props()).toEqual({
+      type: "button",
+      children: "2019",
+      className: "red  btn darken-1 btn-md text-white year-btn",
+      onClick: (f) => f,
+      style: { fontSize: "1rem" },
+    }); */
+  });
+  test("click event", () => {
+    //click event
+    let ybtn = wrapper.find(".year-btn");
+    ybtn.simulate("click");
+    wrapper.setProps({ year: false });
+    expect(_sendValue).toBeCalled();
+    expect(_sendValue).toBeCalledTimes(1);
+    expect(wrapper.find(".year-btn").text()).toBe("2020");
   });
 });

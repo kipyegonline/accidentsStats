@@ -41,7 +41,8 @@ background:#ddd;
 }
 
 svg{
-  z-index:10;
+
+position:relative;
 }
 circle{
   opacity:1;

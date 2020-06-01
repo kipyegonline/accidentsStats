@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import $ from "jquery";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import {
   Button,
   Form,
@@ -10,11 +12,11 @@ import {
   Card,
 } from "reactstrap";
 import Layout from "../UI/Layout";
-import { set } from "d3";
-const numregex = new RegExp("^[0-9]+$");
-console.log("ref", numregex.test("3e333"));
+import { Redirect } from "react-router-dom";
 
-const AddStats = (props) => {
+const numregex = new RegExp("^[0-9]+$");
+
+const AddStats = () => {
   const [classv, setClassv] = useState(0);
   const [year, setYear] = useState(false);
   const [fatalities, setFatalties] = useState("");
@@ -22,14 +24,13 @@ const AddStats = (props) => {
   const [slightInjuries, setSlightInjuries] = useState("");
   const [date, setDate] = useState(new Date().toDateString());
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const form = useRef(null);
   const btn = useRef(null);
-
-  const toggleYear = () => setYear(!year);
-
+  const auth = useSelector((state) => state.auth);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(classv, fatalities);
+    console.log("to submit", classv, fatalities);
     //validate
     if (classv === 0) {
       setError("Please select victim class");
@@ -47,6 +48,8 @@ const AddStats = (props) => {
       ) {
         //ALL GOOD
         btn.current.disabled = true;
+        setSuccess("Sending");
+        setError("");
         //ajax request
         const data = {
           year: year ? new Date().getFullYear() - 1 : new Date().getFullYear(),
@@ -67,16 +70,22 @@ const AddStats = (props) => {
           .then((res) => {
             console.log(res);
             //if successfulll, reset state
-            setError("Success");
+            setSuccess(res.status);
             setTimeout(() => {
               setFatalties("");
               setSeriousInjuries("");
               setSlightInjuries("");
               setClassv(0);
+              setSuccess("");
               btn.current.disabled = false;
-            }, 3000);
+            }, 5000);
           })
-          .catch((err) => console.error("Error", err.message));
+          .catch((error) => {
+            setSuccess("");
+            setError(error.statusText);
+            console.error("Error", error, form);
+            form.current.reset();
+          });
       } else {
         //tell the damn user to enter numbers
         setError("Ensure text fields have number values");
@@ -88,23 +97,13 @@ const AddStats = (props) => {
     }
   };
 
-  return (
+  return auth.isLoggedIn ? (
     <Layout>
       <Form style={formStyle} ref={form} onSubmit={handleSubmit}>
         <FormGroup>
           <p className="text-info text-center">{"Await"}</p>
         </FormGroup>
-
-        <div className="float-right">
-          <button
-            type="button"
-            className="btn blue darken-2 btn-md text-white year-btn"
-            onClick={toggleYear}
-            style={{ fontSize: "1rem" }}
-          >
-            {year ? "2019" : "2020"}
-          </button>
-        </div>
+        <YearBtn sendValue={setYear} year={year} />
         <FormGroup>
           <Label for="selectClass">Select Victim class</Label>
           <ClassSelect getValue={setClassv} selected={classv} data={addClass} />
@@ -152,13 +151,15 @@ const AddStats = (props) => {
             sendValue={setDate}
           />
         </FormGroup>
-
+        <p className="text-danger mt-2">{error}</p>
+        <p className="text-succcess mt-2">{success}</p>
         <Button className="blue lighten-2 btn-block" ref={btn}>
           Submit
         </Button>
-        <p className="text-danger mt-2">{error}</p>
       </Form>
     </Layout>
+  ) : (
+    <Redirect to={"/"} />
   );
 };
 export const ClassSelect = ({ getValue, selected, data }) => (
@@ -176,7 +177,13 @@ export const ClassSelect = ({ getValue, selected, data }) => (
     ))}
   </select>
 );
-
+ClassSelect.propTypes = {
+  getValue: PropTypes.func,
+  selected: PropTypes.number,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({ id: PropTypes.number, name: PropTypes.string })
+  ),
+};
 const formStyle = {
   maxWidth: 600,
   background: "#fff",
@@ -196,6 +203,7 @@ export const addClass = [
 
 export const DataInput = ({ sendValue, type, name, id, placeholder }) => {
   const handleChanges = (e) => {
+    if (e.target.type === "submit") return;
     const paramValue = e.target.value;
     if (paramValue.length > 0) {
       e.target.name == "Date" ? sendValue(paramValue) : sendValue(+paramValue);
@@ -205,8 +213,10 @@ export const DataInput = ({ sendValue, type, name, id, placeholder }) => {
       );
     }
   };
+
   const handleBlur = (e) => {
     let el = $(e.target);
+    if (e.target.type === "submit") return;
     el.next().remove();
     if (e.target.value.length > 0) {
       e.target.style.border = "";
@@ -223,12 +233,54 @@ export const DataInput = ({ sendValue, type, name, id, placeholder }) => {
       type={type}
       name={name}
       id={id}
-      className="form-control"
+      className="form-control mb-2"
       placeholder={placeholder}
       onBlur={handleBlur}
       onChange={handleChanges}
     />
   );
 };
-
+DataInput.propTypes = {
+  sendValue: PropTypes.func,
+  type: PropTypes.string,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+};
+export const YearBtn = ({ sendValue, year }) => {
+  return (
+    <div className="float-right">
+      <button
+        type="button"
+        className={`${
+          year ? "red " : "blue"
+        } btn darken-1 btn-md text-white year-btn`}
+        onClick={() => sendValue(!year)}
+        style={{ fontSize: "1rem" }}
+      >
+        {year ? "2019" : "2020"}
+      </button>
+    </div>
+  );
+};
+YearBtn.propTypes = {
+  sendValue: PropTypes.func,
+  year: PropTypes.bool,
+};
 export default AddStats;
+
+const hillVince = {
+  name: "Vincent Kipago",
+  age: 30,
+  locale: "Litein",
+  occupation: "Web developer",
+  hobbies: ["swimming", "Movies", "Football", "documentaries"],
+  married: true,
+  des: function() {
+    return `my name is ${this.name}, (${this.age}) from ${
+      this.locale
+    } and i am a ${this.occupation}. I am ${this.married ? "" : "not"} married.
+     My hobies are ${this.hobbies.join(",")}. 
+   `;
+  },
+};

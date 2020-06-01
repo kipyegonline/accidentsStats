@@ -4,6 +4,7 @@ const initState = {
   loadedA: false,
   loadedB: false,
   iclass: [],
+  auth: { isLoggedIn: true, userName: "kipyegonline" },
 };
 
 function rootReducer(state = initState, action) {

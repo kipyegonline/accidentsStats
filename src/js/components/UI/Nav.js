@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { HashRouter as HRouter, Route, NavLink as NF } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -13,7 +14,7 @@ import {
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const auth = useSelector((state) => state.auth);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -31,21 +32,29 @@ const NavBar = (props) => {
               </NavItem>
               <NavItem>
                 {" "}
-                <NF className="nav-link" to={"/pie-view"}>
-                  Pie View
+                <NF className="nav-link" to={"/timeline"}>
+                  Timeline
                 </NF>
               </NavItem>
               <NavItem>
                 {" "}
-                <NF className="nav-link" to={"/line-view"}>
-                  Line View
+                <NF className="nav-link" to={"/summary-statistics"}>
+                  Summary
                 </NF>
               </NavItem>
               <NavItem>
                 {" "}
-                <NF className="nav-link" to={"/add-stats"}>
-                  Add Stats
-                </NF>
+                {auth.isLoggedIn ? (
+                  <NF className="nav-link" to={"/add-stats"}>
+                    Add Stats
+                  </NF>
+                ) : null}
+              </NavItem>
+              <NavItem>
+                {" "}
+                {auth.isLoggedIn ? (
+                  <button className="btn yellow btn-sm">{auth.userName}</button>
+                ) : null}
               </NavItem>
             </Nav>
           </Route>

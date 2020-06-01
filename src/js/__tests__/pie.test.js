@@ -3,6 +3,7 @@ import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import NTSAPieChart from "../components/Pie/piechart";
 import { MockStore } from "./redux.test";
+import toJson from "enzyme-to-json";
 Enzyme.configure({ adapter: new Adapter() });
 const data = [
   {
@@ -34,7 +35,8 @@ describe("<NTSAPie/>", () => {
       <NTSAPieChart datas={data} a="fatalties" b="victimClass" />
     </MockStore>
   );
-
+  it("matches snapshot", () =>
+    expect(toJson(wrapper.find("svg"))).toMatchSnapshot());
   describe("SVG", () => {
     it("counts paths", () => expect(wrapper.find("path")).toHaveLength(3));
     it("counts groups", () => expect(wrapper.find("g")).toHaveLength(4));

@@ -1,3 +1,1105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TableList/> renders 1`] = `"<table><tbody><tr><td class=\\"drivers-fatalties-2020\\">345</td><td class=\\"pillion_passengers-fatalties-2020\\">245</td><td class=\\"pedestrians-fatalties-2020\\">445</td></tr></tbody></table>"`;
+exports[`<TableBody/> renders 1`] = `"<td class=\\"drivers-fatalties-2020\\">345</td>"`;
+
+exports[`<TableStats/> matches snapshot 1`] = `
+<table
+  className="table table-hover table-bordered border-outline-primary  position-relative my-3 table"
+>
+  <thead>
+    <tr>
+      <th
+        className="font-weight-bold"
+      >
+        Victim class
+      </th>
+      <th
+        className="font-weight-bold "
+      >
+        Summary
+      </th>
+      <TableList
+        TableBody={[Function]}
+        a="victimClass"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        sendValue={[Function]}
+      >
+        <TableHeader
+          classlist="drivers"
+          key="1"
+          name="drivers"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            }
+          }
+        >
+          <th
+            className="font-weight-bold"
+          >
+            Drivers
+          </th>
+        </TableHeader>
+        <TableHeader
+          classlist="pillion_passengers"
+          key="2"
+          name="pillion_passengers"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            }
+          }
+        >
+          <th
+            className="font-weight-bold"
+          >
+            Pillion passengers
+          </th>
+        </TableHeader>
+        <TableHeader
+          classlist="pedestrians"
+          key="3"
+          name="pedestrians"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            }
+          }
+        >
+          <th
+            className="font-weight-bold"
+          >
+            Pedestrians
+          </th>
+        </TableHeader>
+        <TableHeader
+          classlist="passengers"
+          key="4"
+          name="passengers"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            }
+          }
+        >
+          <th
+            className="font-weight-bold"
+          >
+            Passengers
+          </th>
+        </TableHeader>
+        <TableHeader
+          classlist="motor_cyclists"
+          key="5"
+          name="motor_cyclists"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            }
+          }
+        >
+          <th
+            className="font-weight-bold"
+          >
+            Motor cyclists
+          </th>
+        </TableHeader>
+      </TableList>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Fatalties
+      </td>
+      <td
+        className="font-weight-bold"
+      >
+        1,460
+      </td>
+      <TableList
+        TableBody={[Function]}
+        a="fatalties"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        sendValue={[Function]}
+      >
+        <TableBody
+          classlist="drivers"
+          key="1"
+          name={345}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            }
+          }
+        >
+          <td
+            className="drivers-fatalties-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            345
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="pillion_passengers"
+          key="2"
+          name={245}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            }
+          }
+        >
+          <td
+            className="pillion_passengers-fatalties-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            245
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="pedestrians"
+          key="3"
+          name={445}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            }
+          }
+        >
+          <td
+            className="pedestrians-fatalties-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            445
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="passengers"
+          key="4"
+          name="221"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            }
+          }
+        >
+          <td
+            className="passengers-fatalties-2019"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            221
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="motor_cyclists"
+          key="5"
+          name="204"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            }
+          }
+        >
+          <td
+            className="motor_cyclists-fatalties-2019"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            204
+          </td>
+        </TableBody>
+      </TableList>
+    </tr>
+    <tr>
+      <td>
+        Seriously Injured
+      </td>
+      <td
+        className="font-weight-bold"
+      >
+        2,733
+      </td>
+      <TableList
+        TableBody={[Function]}
+        a="seriouslyInjured"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        sendValue={[Function]}
+      >
+        <TableBody
+          classlist="drivers"
+          key="1"
+          name={654}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            }
+          }
+        >
+          <td
+            className="drivers-seriouslyInjured-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            654
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="pillion_passengers"
+          key="2"
+          name={554}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            }
+          }
+        >
+          <td
+            className="pillion_passengers-seriouslyInjured-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            554
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="pedestrians"
+          key="3"
+          name={454}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            }
+          }
+        >
+          <td
+            className="pedestrians-seriouslyInjured-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            454
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="passengers"
+          key="4"
+          name="715"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            }
+          }
+        >
+          <td
+            className="passengers-seriouslyInjured-2019"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            715
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="motor_cyclists"
+          key="5"
+          name="356"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            }
+          }
+        >
+          <td
+            className="motor_cyclists-seriouslyInjured-2019"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            356
+          </td>
+        </TableBody>
+      </TableList>
+    </tr>
+    <tr>
+      <td>
+        Slightly injured
+      </td>
+      <td
+        className="font-weight-bold"
+      >
+        2,392
+      </td>
+      <TableList
+        TableBody={[Function]}
+        a="slightlyInjured"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        sendValue={[Function]}
+      >
+        <TableBody
+          classlist="drivers"
+          key="1"
+          name={435}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            }
+          }
+        >
+          <td
+            className="drivers-slightlyInjured-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            435
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="pillion_passengers"
+          key="2"
+          name={405}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            }
+          }
+        >
+          <td
+            className="pillion_passengers-slightlyInjured-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            405
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="pedestrians"
+          key="3"
+          name={535}
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            }
+          }
+        >
+          <td
+            className="pedestrians-slightlyInjured-2020"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            535
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="passengers"
+          key="4"
+          name="919"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            }
+          }
+        >
+          <td
+            className="passengers-slightlyInjured-2019"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            919
+          </td>
+        </TableBody>
+        <TableBody
+          classlist="motor_cyclists"
+          key="5"
+          name="98"
+          sendValue={[Function]}
+          yoda={
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            }
+          }
+        >
+          <td
+            className="motor_cyclists-slightlyInjured-2019"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOut={[Function]}
+          >
+            98
+          </td>
+        </TableBody>
+      </TableList>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td
+        className="font-weight-bold"
+      >
+        Total
+      </td>
+      <td
+        className="purple darken-1 text-white text-lg"
+      >
+        6,585
+      </td>
+      <TableFoot
+        a="drivers"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        key="0"
+      >
+        <td
+          className="font-weight-bold summary_drivers_2020"
+          data-hover="summary_drivers_2020"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          1,434
+        </td>
+      </TableFoot>
+      <TableFoot
+        a="pillion_passengers"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        key="1"
+      >
+        <td
+          className="font-weight-bold summary_pillion_passengers_2020"
+          data-hover="summary_pillion_passengers_2020"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          1,204
+        </td>
+      </TableFoot>
+      <TableFoot
+        a="pedestrians"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        key="2"
+      >
+        <td
+          className="font-weight-bold summary_pedestrians_2020"
+          data-hover="summary_pedestrians_2020"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          1,434
+        </td>
+      </TableFoot>
+      <TableFoot
+        a="passengers"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        key="3"
+      >
+        <td
+          className="font-weight-bold summary_passengers_2020"
+          data-hover="summary_passengers_2020"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          1,855
+        </td>
+      </TableFoot>
+      <TableFoot
+        a="motor_cyclists"
+        data={
+          Array [
+            Object {
+              "addedon": "2020-02-14",
+              "fatalties": 345,
+              "fill": "green",
+              "id": 1,
+              "seriouslyInjured": 654,
+              "slightlyInjured": 435,
+              "victimClass": "drivers",
+            },
+            Object {
+              "addedon": "2020-03-14",
+              "fatalties": 245,
+              "fill": "yellow",
+              "id": 2,
+              "seriouslyInjured": 554,
+              "slightlyInjured": 405,
+              "victimClass": "pillion_passengers",
+            },
+            Object {
+              "addedon": "2020-05-14",
+              "fatalties": 445,
+              "fill": "red",
+              "id": 3,
+              "seriouslyInjured": 454,
+              "slightlyInjured": 535,
+              "victimClass": "pedestrians",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "221",
+              "fill": "orange",
+              "id": 4,
+              "seriouslyInjured": "715",
+              "slightlyInjured": "919",
+              "victimClass": "passengers",
+            },
+            Object {
+              "addedon": "2019-04-23",
+              "fatalties": "204",
+              "fill": "green",
+              "id": 5,
+              "seriouslyInjured": "356",
+              "slightlyInjured": "98",
+              "victimClass": "motor_cyclists",
+            },
+          ]
+        }
+        key="4"
+      >
+        <td
+          className="font-weight-bold summary_motor_cyclists_2020"
+          data-hover="summary_motor_cyclists_2020"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          658
+        </td>
+      </TableFoot>
+    </tr>
+  </tfoot>
+</table>
+`;
