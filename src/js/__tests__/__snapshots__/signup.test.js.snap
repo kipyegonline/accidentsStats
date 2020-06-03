@@ -1,0 +1,427 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login/> Matches snapshot 1`] = `
+<form
+  className="form p-3 mx-auto"
+  onSubmit={[Function]}
+>
+  <h3
+    className="text-center p-2"
+  >
+    Login
+  </h3>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        className="mb-2"
+        htmlFor="login-email"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className="mb-2"
+          htmlFor="login-email"
+        >
+          Email
+        </label>
+      </Label>
+      <DataInput
+        classlist="form-ccontrol"
+        id="login-email"
+        name="email"
+        placeholder=""
+        sendValue={[Function]}
+        type="email"
+      >
+        <Input
+          className="form-ccontrol"
+          id="login-email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="email"
+        >
+          <input
+            className="form-ccontrol form-control"
+            id="login-email"
+            name="email"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="email"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        className="mb-2"
+        htmlFor="login-password"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className="mb-2"
+          htmlFor="login-password"
+        >
+          Password
+        </label>
+      </Label>
+      <DataInput
+        classlist="form-ccontrol"
+        id="login-password"
+        name="set-password"
+        placeholder=""
+        sendValue={[Function]}
+        type="password"
+      >
+        <Input
+          className="form-ccontrol"
+          id="login-password"
+          name="set-password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="password"
+        >
+          <input
+            className="form-ccontrol form-control"
+            id="login-password"
+            name="set-password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="password"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <p
+        className="text-danger"
+      />
+      <p
+        className="text-success"
+      />
+    </div>
+  </FormGroup>
+  <input
+    className="btn btn-primary btn-block"
+    id="login-submit"
+    name="submit"
+    placeholder=""
+    type="submit"
+    value="Login"
+  />
+</form>
+`;
+
+exports[`Mount the form matches snapshot 1`] = `
+<form
+  className="form"
+  onSubmit={[Function]}
+  style={
+    Object {
+      "background": "#fefefe",
+      "margin": "1rem auto",
+      "maxWidth": 600,
+      "padding": "1rem",
+    }
+  }
+>
+  <h5
+    className="text-center p-1 my-2"
+  >
+    Sign up section.
+  </h5>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        htmlFor="username"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="username"
+        >
+          Username
+        </label>
+      </Label>
+      <DataInput
+        classlist="form-control mb-2"
+        id="username"
+        name="username"
+        placeholder=""
+        sendValue={[Function]}
+        type="text"
+      >
+        <Input
+          className="form-control mb-2"
+          id="username"
+          name="username"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="text"
+        >
+          <input
+            className="form-control mb-2 form-control"
+            id="username"
+            name="username"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="text"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        htmlFor="email"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="email"
+        >
+          Email
+        </label>
+      </Label>
+      <DataInput
+        classlist="form-control mb-2"
+        id="email"
+        name="email"
+        placeholder=""
+        sendValue={[Function]}
+        type="email"
+      >
+        <Input
+          className="form-control mb-2"
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="email"
+        >
+          <input
+            className="form-control mb-2 form-control"
+            id="email"
+            name="email"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="email"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        htmlFor="password"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+          htmlFor="password"
+        >
+          Password
+        </label>
+      </Label>
+      <DataInput
+        classlist="form-control mb-2"
+        id="password"
+        name="password"
+        placeholder=""
+        sendValue={[Function]}
+        type="password"
+      >
+        <Input
+          className="form-control mb-2"
+          id="password"
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="password"
+        >
+          <input
+            className="form-control mb-2 form-control"
+            id="password"
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="password"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <FormGroup
+    tag="div"
+  >
+    <div
+      className="form-group"
+    >
+      <Label
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className=""
+        >
+          Confirm Passsword
+        </label>
+      </Label>
+      <DataInput
+        classlist="form-control mb-2"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder=""
+        sendValue={[Function]}
+        type="password"
+      >
+        <Input
+          className="form-control mb-2"
+          id="confirmPassword"
+          name="confirmPassword"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder=""
+          type="password"
+        >
+          <input
+            className="form-control mb-2 form-control"
+            id="confirmPassword"
+            name="confirmPassword"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder=""
+            type="password"
+          />
+        </Input>
+      </DataInput>
+    </div>
+  </FormGroup>
+  <p
+    className="text-danger text-center my-2"
+  />
+  <p
+    className="text-sucess text-center my-2"
+  />
+  <DataInput
+    classlist="btn btn-block indigo text-white"
+    id=""
+    name=""
+    placeholder=""
+    sendValue={[Function]}
+    type="submit"
+  >
+    <Input
+      className="btn btn-block indigo text-white"
+      id=""
+      name=""
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder=""
+      type="submit"
+    >
+      <input
+        className="btn btn-block indigo text-white form-control"
+        id=""
+        name=""
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder=""
+        type="submit"
+      />
+    </Input>
+  </DataInput>
+</form>
+`;

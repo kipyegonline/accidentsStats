@@ -83,3 +83,12 @@ $.ajax({
 })
   .then((res) => console.log(res, "resss"))
   .catch((err) => console.error("errr", err));
+
+//check if logged in
+const res = JSON.parse(localStorage.getItem("accidentStats"));
+if (res) {
+  store.dispatch({
+    type: "ADD_AUTH",
+    payload: { isLoggedIn: res.logger, userName: res.username },
+  });
+}

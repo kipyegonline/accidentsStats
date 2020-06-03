@@ -184,7 +184,7 @@ describe("<Circle/>", () => {
       children: "<text>Welcome to the blue story</text>", //plus everything up there
     }));
   test("Mouse events", () => {
-    wrapper.simulate("mouseover");
+    wrapper.simulate("mouseenter");
     expect(hh).toHaveBeenCalled();
     expect(hh).toHaveBeenCalledTimes(1);
     wrapper.simulate("mouseleave");

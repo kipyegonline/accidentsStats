@@ -244,6 +244,7 @@ export const Circle = ({
   classlist,
   hh,
   hl,
+  hv,
 }) => (
   <circle
     cx={cx}
@@ -252,7 +253,8 @@ export const Circle = ({
     shapeRendering="auto"
     fill={fill}
     onMouseEnter={hh}
-    onMouseOver={hh}
+    onMouseOver={hv}
+    onClick={hh}
     opacity={opacity}
     strokeWidth={strokew}
     onMouseLeave={hl}
@@ -266,6 +268,7 @@ export const Circle = ({
 Circle.propTypes = {
   hh: PropTypes.func,
   hl: PropTypes.func,
+  hv: PropTypes.func,
   cx: PropTypes.number.isRequired,
   cy: PropTypes.number.isRequired,
   r: PropTypes.number.isRequired,
@@ -324,10 +327,11 @@ export const ToolTip = styled.div`
   width: ${(props) => (props.tools !== undefined ? props.tools.width : 0)}px;
   height: 120px;
   z-index: 100;
+  pointer-events: none;
   text-transform: capitalize;
   position: absolute;
   padding: 1rem;
-  margin: ${(props) => console.log("till", props)};
+  margin: ${(props) => console.log("daigle", props.tools)};
   line-height: 1em;
   top: ${(props) => (props.tools !== undefined ? props.tools.top : 0)}px;
   left: ${(props) => (props.tools !== undefined ? props.tools.left : 0)}px;
@@ -337,11 +341,12 @@ export const ToolTip = styled.div`
         ? 1
         : 0
       : 0};
-  background: white;
+  background: ${(props) => (props.tools.bg ? props.tools.bg : "white")};
   transform: translate(
     ${(props) => props.tools.left},
     ${(props) => props.tools.top}
   );
+  pointer-events: none;
 
   @media (max-width: 380px) {
     width: ${(props) => (props.tools !== undefined ? props.tools.width : 0)};

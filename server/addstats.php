@@ -9,23 +9,36 @@ if(isset($_GET["addStats"]) && $_GET["addStats"]=="true" ){
     $slightInjuries=$_POST["slightInjuries"];
     $fatalities=$_POST["fatalities"];
     $date=$_POST["date"];
-  
-//if everything is present
-    if($vClass > 0 && strlen($year)>0 && strlen( $seriousInjuries)>0 && strlen($slightInjuries) >0 && strlen( $fatalities) >0 && strlen($date)>0){
-$year==2020 ? insertStats("victimsCases", $vClass,$fatalities,$seriousInjuries,$slightInjuries,$date, $year) :
-insertStats("victimsCases2019", $vClass,$fatalities,$seriousInjuries,$slightInjuries,$date,$year) 
-;
+
+    $table=$year==2020 ? "victimsCases" :"victimsCases2019";
+    //check duplication cases
+  $res=[];
+$query="SELECT COUNT(*) FROM $table WHERE addedOn='{$date}' and fatal={$fatalities}";
+
+    if(checkDuplicate($query)){
+         $res["msg"]="It seems you're trying to add duplicate information.Please check dates and try again";
+        $res["status"]=201;
+         echo json_encode($res);
     }else{
-        $res=[];
+        //if no duplicates
+        //and everything is present, atleast
+    if($vClass > 0 && strlen($year)>0 && strlen( $seriousInjuries)>0 && strlen($slightInjuries) >0 && strlen( $fatalities) >0 && strlen($date)>0){
+ insertStats($table, $vClass,$fatalities,$seriousInjuries,$slightInjuries,$date, $year);
+    }else{
+      
+        $res["msg"]="Some details are missing.Check and try again";
         $res["status"]=201;
          echo json_encode($res);
     }
+
+    }
+
 } //GET'
 
 if(isset($_GET["fetchStats"]) && $_GET["fetchStats"]=="true" ){
  $table=$_GET["tableName"];
  $res=[];
- 
+
      if(!empty($table)){
  fetchStats($table);
      }else{
@@ -38,7 +51,8 @@ echo json_encode($res);
 }//GET
 function insertStats($table,$vClass,$fatalties,$seriousInjuries,$slightInjuries,$date,$year){
     global $connection;
-    
+    //check if the are duplicate
+
     
 
     $sql="insert into {$table} (
@@ -107,6 +121,24 @@ function fetchStats($table){
         echo "Error fetching info " . $e.getMessage();
     }
 
+}
+function checkDuplicate($sql){
+    global $connection;
+    $stmt=$connection->query($sql);
+if($stmt){
+    $rowCount=$stmt-> fetchColumn();
+ if($rowCount >0){
+return true;
+    }else{
+return false;
+    }
+}else{
+   return false;
+}
+
+   
+     
+    
 }
 
 ?>

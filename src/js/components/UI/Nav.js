@@ -17,35 +17,47 @@ const NavBar = (props) => {
   const auth = useSelector((state) => state.auth);
   const toggle = () => setIsOpen(!isOpen);
 
+  const style = {
+    borderBottom: "1px solid red",
+    fontWeight: "bold",
+  };
   return (
     <HRouter>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">NTSA</NavbarBrand>
+        <NavbarBrand href="/">DV</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Route>
             <Nav className={`mr-auto plot`} navbar>
               <NavItem>
-                <NF className="nav-link" to={"/"}>
+                <NF activeStyle={style} className="nav-link" to={"/"}>
                   Home
                 </NF>
               </NavItem>
               <NavItem>
                 {" "}
-                <NF className="nav-link" to={"/timeline"}>
+                <NF activeStyle={style} className="nav-link" to={"/timeline"}>
                   Timeline
                 </NF>
               </NavItem>
               <NavItem>
                 {" "}
-                <NF className="nav-link" to={"/summary-statistics"}>
+                <NF
+                  activeStyle={style}
+                  className="nav-link"
+                  to={"/summary-statistics"}
+                >
                   Summary
                 </NF>
               </NavItem>
               <NavItem>
                 {" "}
                 {auth.isLoggedIn ? (
-                  <NF className="nav-link" to={"/add-stats"}>
+                  <NF
+                    activeStyle={style}
+                    className="nav-link"
+                    to={"/add-stats"}
+                  >
                     Add Stats
                   </NF>
                 ) : null}

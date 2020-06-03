@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "reactstrap";
 import * as d3 from "d3";
 import {
@@ -10,6 +10,8 @@ import {
   Text,
   sumValues,
   months,
+  ToolTip,
+  Ptip,
 } from "../tools/SvgComp";
 import { splitEm } from "../Pie/piechart";
 
@@ -29,6 +31,8 @@ const xaxis = d3.axisBottom(xScale).ticks(10); //.tickFormat(d => new Date(d).to
 const gridlines = () => d3.axisLeft(yScale);
 
 export default function lineChart({ datam, a, b, c, d }) {
+  const [tools, setTools] = useState({});
+  const getValue = (data) => setTools(data);
   const cleanData = (data) =>
     data.map((d) => ({
       ...d,
@@ -96,6 +100,7 @@ export default function lineChart({ datam, a, b, c, d }) {
   return (
     <Row>
       <Col>
+        <ToolBar tools={tools} />
         <SVG width={500} height={480} bg={"#fefefe"}>
           <Group gw={gw} x={60} y={20} gh={gh}>
             {/**Year label */}
@@ -144,8 +149,8 @@ export default function lineChart({ datam, a, b, c, d }) {
 
               return (
                 <Group x={0} y={0} key={i}>
-                  <PathFinder data={d} a={a} b={b} />
-                  {<CirclePath d={d} a={a} b={b} />}
+                  {/* <PathFinder data={d} a={a} b={b} />*/}
+                  {<CirclePath d={d} a={a} b={b} sendValue={getValue} />}
                   {<LastText d={d} a={a} b={b} />}
                 </Group>
               );
@@ -173,15 +178,46 @@ const PathFinder = ({ data, a, b }) => {
   return <Path d={line(data)} fill="none" stroke={data[0].fill} strokew={2} />;
 };
 
-const CirclePath = ({ d, a, b }) => {
+const CirclePath = ({ d, a, b, sendValue }) => {
+  let positionX, positionY;
+  const handleMouseOver = (e, data) => {
+    const selected = d3.select(e.target);
+    const tools = {
+      opacity: true,
+      top: +selected.attr("cy"),
+      left: +selected.attr("cx"),
+      width: 150,
+      info: data,
+      bg: "lightblue",
+    };
+    if (positionX === selected.attr("cx")) {
+    } else {
+      positionX = selected.attr("cx");
+      sendValue(tools);
+    }
+  };
+
+  const handleMouseLeave = (e) => {
+    const selected = d3.select(e.target);
+    console.log(positionY, "xxxx");
+    if (positionY === selected.attr("cx")) {
+      console.log("leaving same position");
+    } else {
+      positionY = selected.attr("cx");
+      //sendValue({ opacity: false });
+      console.log("leave to a new", positionY, selected.attr("cx"));
+    }
+  };
   return d.map((item, i) => (
     <Circle
       key={item.id}
+      hh={(e) => handleMouseOver(e, item)}
+      hl={handleMouseLeave}
       cx={xScale(item[a])}
       cy={
         yScale(item[b]) > gh ? Math.abs(gh - yScale(item[b])) : yScale(item[b])
       }
-      r={i === 0 ? 5 : i * 3}
+      r={10} //i === 0 ? 5 : i * 3
       fill={item.fill}
     />
   ));
@@ -196,5 +232,28 @@ const LastText = ({ d, a, b }) => {
         ? d[d.length - 1][b].toFixed(1) + "k"
         : d[d.length - 1][b]}
     </Text>
+  );
+};
+
+const ToolBar = ({ tools }) => {
+  return (
+    <ToolTip tools={tools}>
+      {tools.info !== undefined ? (
+        <>
+          <Ptip classlist="text-center">
+            <b>{tools.info.addedon.toDateString()}</b>
+          </Ptip>
+          <Ptip>
+            Fatalties: <b>{tools.info.fatalties}</b>
+          </Ptip>
+          <Ptip>
+            Seriously Injured: <b>{tools.info.seriouslyInjured}</b>
+          </Ptip>
+          <Ptip>
+            Slightly Injured: <b>{tools.info.slightlyInjured}</b>
+          </Ptip>
+        </>
+      ) : null}
+    </ToolTip>
   );
 };

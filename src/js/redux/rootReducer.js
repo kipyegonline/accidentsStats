@@ -4,7 +4,7 @@ const initState = {
   loadedA: false,
   loadedB: false,
   iclass: [],
-  auth: { isLoggedIn: true, userName: "kipyegonline" },
+  auth: {}, //{ isLoggedIn: true, userName: "kipyegonline" },
 };
 
 function rootReducer(state = initState, action) {
@@ -14,6 +14,8 @@ function rootReducer(state = initState, action) {
     return { ...state, ntsb: action.payload, loadedB: true };
   } else if (action.type === "ADD_CLASS") {
     return { ...state, iclass: action.payload };
+  } else if (action.type === "ADD_AUTH") {
+    return { ...state, auth: action.payload };
   } else {
     return state;
   }

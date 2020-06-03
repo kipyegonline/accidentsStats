@@ -24,10 +24,11 @@ function TableStats({ ntsa }) {
     setTools({
       width: val.width,
       height: val.height,
-      x: val.x,
-      y: val.y,
-      top: window.screenY,
-      left: window.screenX,
+      x: 0,
+      y: 0,
+      top: e.pageY - val.y,
+      left: val.x - (e.pageX - val.x),
+      opacity: true,
     });
   };
 
@@ -99,11 +100,3 @@ function TableStats({ ntsa }) {
   );
 }
 export default TableStats;
-
-let name = "sheeila";
-let newName = "";
-for (let i = 0; i < name.length; i++) {
-  for (let j = 0; j < name.length; j++) {
-    //console.log(name[i], "\n", name[j]);
-  }
-}

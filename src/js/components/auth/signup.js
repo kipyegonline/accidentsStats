@@ -3,8 +3,9 @@ import { v4 } from "uuid";
 import PropTypes from "prop-types";
 import { Row, Col, FormGroup, Label, Input } from "reactstrap";
 import Layout from "../UI/Layout";
-
+import $ from "jquery";
 function SignUp() {
+  //initialize state for user data
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,16 +14,22 @@ function SignUp() {
   const [success, setSuccess] = useState("");
   const btn = useRef(null);
   const form = useRef(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit:", username, email, password, confPassword);
+    //remove all error spans from the DOM
+    $("span.text-danger").remove();
+    //quick validation
     if (username.trim().length === 0 || username.trim().length < 5) {
+      //ternary for the two checks...one or the other
       username.trim().length === 0
         ? setError("Name cannot be blank")
         : setError("Enter a  longer username");
     } else if (email.trim().length < 5 || !email.includes("@")) {
       setError("An email address is required.");
-    } else if (password.length === 0 || password.length < 5) {
+    } else if (password.length === 0 || password.length < 6) {
+      //ternary for the two checks...one or the other
       password.length === 0
         ? setError("A Password isrequired.")
         : setError(" A password should have minimum of 6 characters");
@@ -39,7 +46,7 @@ function SignUp() {
       confPassword.length > 5
     ) {
       console.log("sending");
-      //send to server
+      //send to server if all requirements are satisfied
       setError("");
       setSuccess("sending......");
       $.ajax({
@@ -62,11 +69,13 @@ function SignUp() {
           }
         })
         .catch((error) => {
+          //throw an error incasxe of network
           setError(error.statusText);
           setSuccess("");
           console.log("sign up err", error.statusText);
         });
     } else {
+      //Throw an error for the known uknown or rather unknown known
       setError("Encountered an error signing you up. Try again later.");
     }
   };
@@ -148,7 +157,14 @@ function SignUp() {
   );
 }
 
-const DataInput = ({ sendValue, type, name, id, placeholder, classlist }) => {
+export const DataInput = ({
+  sendValue,
+  type,
+  name,
+  id,
+  placeholder,
+  classlist,
+}) => {
   const handleChanges = (e) => {
     if (e.target.name === "submit") return;
 

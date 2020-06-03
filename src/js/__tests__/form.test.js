@@ -7,23 +7,31 @@ import AddStats, {
   addClass,
   DataInput,
   YearBtn,
+  AddStatitics,
 } from "../components/AddStats/addstats";
 
+import { MockStore } from "./redux.test";
 Enzyme.configure({ adapter: new Adapter() });
 
+//This test will work if the user is aunthenticated
 describe("<AddStatsForm/>", () => {
-  const wrapper = mount(<AddStats />);
-  describe("Tje form renders the UI", () => {
+  const wrapper = mount(
+    <MockStore>
+      <AddStatitics auth={{ isLoggedIn: true, UserName: "Vince" }} />
+    </MockStore>
+  );
+
+  describe("The form renders the UI", () => {
     test("Matches snapshot", () =>
       expect(toJSON(wrapper.find("form"))).toMatchSnapshot());
     it("has 4 input elements ", () =>
       expect(wrapper.find("input").length).toBe(4));
     //3 not 2 since i also mounted a button from the navbar
-    it("has 2 buttons", () => expect(wrapper.find("button")).toHaveLength(3));
+    it("has 2 buttons", () => expect(wrapper.find("button")).toHaveLength(4));
   });
   //the paragraphs
   it("has 2 p tags", () => {
-    expect(wrapper.find("p").length).toEqual(2);
+    expect(wrapper.find("p").length).toEqual(3);
   });
   it("submits the form unsuccessfully", () => {
     let form = wrapper.find("form");

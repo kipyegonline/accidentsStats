@@ -32,50 +32,61 @@ function Main() {
   const main = fixData(data.ntsa);
   const mainB = fixData(data.ntsb);
   const getValue = (val) => setSelected(val);
+  const getDate = (date) => new Date(date);
 
   let month = "",
     month2 = "";
+  let y = "",
+    y1 = "";
   if (data.loadedA && data.loadedB) {
-    month = new Date(main[selected][0].addedon).toDateString();
-    month2 = new Date(mainB[selected][0].addedon).toDateString();
+    month = getDate(main[selected][0].addedon).toDateString();
+    month2 = getDate(mainB[selected][0].addedon).toDateString();
+    y = getDate(main[selected][0].addedon).getFullYear();
+    y1 = getDate(mainB[selected][0].addedon).getFullYear();
   }
-  /*
-    data.length > 0 !== undefined
-      ? new Date(data[0].addedon).toDateString()
-      : "";*/
 
   return (
     <Layout>
       <Row className="my-3">
         <Row className="mt-5">
-          <Col>
+          <Col className="table-responsive" md="2" sm="12">
             {data.loadedA && data.loadedB ? (
-              <SelectedMonth data={main} sendValue={getValue} />
+              <>
+                <label>Choose Month</label>
+                <SelectedMonth data={main} sendValue={getValue} />
+              </>
             ) : null}
           </Col>
+
+          <Col className="table-responsive" md="10" sm="12">
+            <p className="font-weight-bold">
+              COMPARATIVE STATISTICS TRENDS FOR {y} - {"  "}
+              <span className="text-info"> {month} </span>
+            </p>
+            {data.loadedA && data.loadedB ? (
+              <TableStats ntsa={main[selected]} />
+            ) : (
+              <p>Loading</p>
+            )}
+          </Col>
         </Row>
-        <Col className="position-relative">
-          <p>
-            COMPARATIVE STATISTICS TRENDS FOR 2019 AND 2020 AS AT {"  "}
-            <span className="text-info"> {month} </span>
-          </p>
-          {data.loadedA && data.loadedB ? (
-            <TableStats ntsa={main[selected]} />
-          ) : (
-            <p>Loading</p>
-          )}
-        </Col>
-        <Col className="position-relative">
-          <p>
-            COMPARATIVE STATISTICS TRENDS FOR 2019 AND 2020 {"  "}
-            <span className="text-info"> {month2} </span>
-          </p>
-          {data.loadedA && data.loadedB ? (
-            <TableStats ntsa={mainB[selected]} />
-          ) : (
-            <p>Loading</p>
-          )}
-        </Col>
+        <Row>
+          <Col
+            className="table-responsive "
+            md={{ size: 10, offset: 2 }}
+            sm="12"
+          >
+            <p className="font-weight-bold">
+              COMPARATIVE STATISTICS TRENDS FOR {y1} {"  "} -
+              <span className="text-info"> {month2} </span>
+            </p>
+            {data.loadedA && data.loadedB ? (
+              <TableStats ntsa={mainB[selected]} />
+            ) : (
+              <p>Loading</p>
+            )}
+          </Col>
+        </Row>
       </Row>
     </Layout>
   );

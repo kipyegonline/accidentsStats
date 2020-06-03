@@ -33,7 +33,7 @@ function NTSAPieChart({ datas, a, b, diff }) {
     .arc()
     .innerRadius(0)
     .outerRadius(radius);
-  console.log(a);
+
   const color = d3.scaleOrdinal(d3.schemeCategory10);
 
   const pie = d3
@@ -54,11 +54,10 @@ function NTSAPieChart({ datas, a, b, diff }) {
     }
   };
   const handleLeave = () => {
-    console.log("left");
     setTools({ opacity: false });
   };
   useEffect(() => {}, []);
-  //console.log("hfhfhfh", dataset[0], sumValues(data, a));
+
   const year = new Date(dataset[0].data.addedon).getFullYear();
   const month = months[new Date(dataset[0].data.addedon).getMonth()];
 

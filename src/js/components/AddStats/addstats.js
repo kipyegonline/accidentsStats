@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import $ from "jquery";
+
 import { useSelector } from "react-redux";
+import { Redirect, HashRouter as Router } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Button,
@@ -12,11 +14,11 @@ import {
   Card,
 } from "reactstrap";
 import Layout from "../UI/Layout";
-import { Redirect } from "react-router-dom";
+import AddStatsTable from "./addStatsTable";
 
 const numregex = new RegExp("^[0-9]+$");
 
-const AddStats = () => {
+export const AddStatitics = ({ auth }) => {
   const [classv, setClassv] = useState(0);
   const [year, setYear] = useState(false);
   const [fatalities, setFatalties] = useState("");
@@ -27,7 +29,7 @@ const AddStats = () => {
   const [success, setSuccess] = useState("");
   const form = useRef(null);
   const btn = useRef(null);
-  const auth = useSelector((state) => state.auth);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("to submit", classv, fatalities);
@@ -99,6 +101,7 @@ const AddStats = () => {
 
   return auth.isLoggedIn ? (
     <Layout>
+      <AddStatsTable />
       <Form style={formStyle} ref={form} onSubmit={handleSubmit}>
         <FormGroup>
           <p className="text-info text-center">{"Await"}</p>
@@ -159,8 +162,14 @@ const AddStats = () => {
       </Form>
     </Layout>
   ) : (
-    <Redirect to={"/"} />
+    <Router>
+      <Redirect to={"/login"} />
+    </Router>
   );
+};
+const AddStats = () => {
+  const auth = useSelector((state) => state.auth);
+  return <AddStatitics auth={auth} />;
 };
 export const ClassSelect = ({ getValue, selected, data }) => (
   <select
