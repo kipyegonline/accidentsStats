@@ -99,7 +99,8 @@ export const AddStatitics = ({ auth }) => {
     }
   };
 
-  return auth.isLoggedIn ? (
+  return auth.isLoggedIn ||
+    JSON.parse(localStorage.getItem("accidentStats")) ? (
     <Layout>
       <AddStatsTable />
       <Form style={formStyle} ref={form} onSubmit={handleSubmit}>

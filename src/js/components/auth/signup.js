@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import { v4 } from "uuid";
 import PropTypes from "prop-types";
+import { Link, Redirect } from "react-router-dom";
 import { Row, Col, FormGroup, Label, Input } from "reactstrap";
 import Layout from "../UI/Layout";
 import $ from "jquery";
-function SignUp() {
+function SignUp({ history }) {
   //initialize state for user data
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit:", username, email, password, confPassword);
+
     //remove all error spans from the DOM
     $("span.text-danger").remove();
     //quick validation
@@ -45,7 +46,6 @@ function SignUp() {
       password.length > 5 &&
       confPassword.length > 5
     ) {
-      console.log("sending");
       //send to server if all requirements are satisfied
       setError("");
       setSuccess("sending......");
@@ -56,15 +56,17 @@ function SignUp() {
         data: { username, email, password, confPassword, hashCode: v4() },
       })
         .then((res) => {
-          console.log("server", res);
           if (res.status == 201) {
             setError(res.msg);
             setSuccess("");
+            setTimeout(() => setError(""), 3000);
           } else {
             setSuccess(res.msg);
             setTimeout(() => {
               setError("");
-              form.currrent().reset();
+              setSuccess("");
+              form.currrent.reset();
+              history.push("/login");
             }, 5000);
           }
         })
@@ -85,7 +87,8 @@ function SignUp() {
     background: "#fefefe",
     padding: "1rem",
   };
-  return (
+  // check if the user is logged in,else send them away
+  return JSON.parse(localStorage.getItem("accidentStats")) ? (
     <Layout>
       <Row>
         <Col size={8} offset={3}>
@@ -141,7 +144,7 @@ function SignUp() {
               />
             </FormGroup>
             <p className="text-danger text-center my-2">{error}</p>
-            <p className="text-sucess text-center my-2">{success}</p>
+            <p className="text-success text-center my-2">{success}</p>
             <DataInput
               sendValue={(f) => f}
               type="submit"
@@ -150,10 +153,15 @@ function SignUp() {
               classlist="btn btn-block indigo text-white"
               placeholder=""
             />
+            <p className="text-center my-2">
+              <Link to={"/login"}>Login</Link>
+            </p>
           </form>
         </Col>
       </Row>
     </Layout>
+  ) : (
+    <Redirect to={"/"} />
   );
 }
 
@@ -186,6 +194,7 @@ export const DataInput = ({
     }
     //email
     if (e.target.type === "email") {
+      if (e.target.id === "login-email") return;
       $(el.prev().hasClass("text-danger"))["0"] ? el.prev().remove() : null;
       if (e.target.value.trim().length === 0 || !e.target.value.includes("@")) {
         el.before("<span class='text-danger ml-2'> is required. </span>");

@@ -4,9 +4,9 @@ import { Row, Col, Table, Tr } from "reactstrap";
 import TableList, { TableHeader, TableBody, TableFoot } from "./TableList";
 import { sumValues, AddObjectProps, ToolTip } from "../tools/SvgComp";
 
-function TableStats({ ntsa }) {
+function TableStats({ ntsa, getValue }) {
   const [total, setTotal] = useState(0);
-  const [tools, setTools] = useState({});
+
   const getSummary = (ntsa) =>
     ntsa
       .map(
@@ -20,22 +20,10 @@ function TableStats({ ntsa }) {
   useEffect(() => {
     setTotal(getSummary(ntsa));
   });
-  const getValue = (val, e) => {
-    setTools({
-      width: val.width,
-      height: val.height,
-      x: 0,
-      y: 0,
-      top: e.pageY - val.y,
-      left: val.x - (e.pageX - val.x),
-      opacity: true,
-    });
-  };
 
   return (
     <>
-      <ToolTip tools={tools} />
-      <Table className="table table-hover table-bordered border-outline-primary  position-relative my-3">
+      <Table className="table table-hover table-responsive table-bordered border-outline-primary  position-relative my-3">
         <thead>
           <tr>
             <th className="font-weight-bold">Victim class</th>
@@ -87,11 +75,16 @@ function TableStats({ ntsa }) {
         <tfoot>
           <tr>
             <td className="font-weight-bold">Total</td>
-            <td className="purple darken-1 text-white text-lg">
+            <td className=" text-primary font-weight-bold text-lg">
               {total.toLocaleString()}
             </td>
             {ntsa.map((nt, i) => (
-              <TableFoot key={i} data={ntsa} a={nt["victimClass"]} />
+              <TableFoot
+                key={i}
+                data={ntsa}
+                sendValue={getValue}
+                a={nt["victimClass"]}
+              />
             ))}
           </tr>
         </tfoot>

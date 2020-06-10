@@ -8,16 +8,19 @@ const initState = {
 };
 
 function rootReducer(state = initState, action) {
-  if (action.type === "ADD_NTSA") {
-    return { ...state, ntsa: action.payload, loadedA: true };
-  } else if (action.type === "ADD_NTSB") {
-    return { ...state, ntsb: action.payload, loadedB: true };
-  } else if (action.type === "ADD_CLASS") {
-    return { ...state, iclass: action.payload };
-  } else if (action.type === "ADD_AUTH") {
-    return { ...state, auth: action.payload };
-  } else {
-    return state;
+  switch (action.type) {
+    case "ADD_NTSA":
+      return { ...state, ntsa: action.payload, loadedA: true };
+    case "ADD_NTSB":
+      return { ...state, ntsb: action.payload, loadedB: true };
+    case "ADD_CLASS":
+      return { ...state, iclass: action.payload };
+    case "ADD_AUTH":
+      return { ...state, auth: action.payload };
+    case "REMOVE_AUTH":
+      return { ...state, auth: {} };
+    default:
+      return state;
   }
 }
 export default rootReducer;

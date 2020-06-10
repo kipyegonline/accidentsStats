@@ -63,17 +63,6 @@ function NTSALine() {
   return (
     <Layout>
       <Row className="my-3">
-        <Slider
-          max={10}
-          min={0}
-          onChange={handleChange}
-          step={1}
-          track="normal"
-          value={slid}
-          marks={[]}
-          valueLabelDisplay="on"
-        />
-
         <Col>
           {" "}
           {loadedA && loadedB > 0 ? (

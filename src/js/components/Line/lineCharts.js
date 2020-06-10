@@ -144,12 +144,12 @@ export default function lineChart({ datam, a, b, c, d }) {
                   </Text>
                 ))}
             </Group>
-            {data.map((d, i) => {
+            {data.slice().map((d, i) => {
               updateScales(d, updateAxis);
 
               return (
                 <Group x={0} y={0} key={i}>
-                  {/* <PathFinder data={d} a={a} b={b} />*/}
+                  <PathFinder data={d} a={a} b={b} />
                   {<CirclePath d={d} a={a} b={b} sendValue={getValue} />}
                   {<LastText d={d} a={a} b={b} />}
                 </Group>
@@ -183,12 +183,13 @@ const CirclePath = ({ d, a, b, sendValue }) => {
   const handleMouseOver = (e, data) => {
     const selected = d3.select(e.target);
     const tools = {
-      opacity: true,
+      opacity: false,
       top: +selected.attr("cy"),
       left: +selected.attr("cx"),
-      width: 150,
+      width: 100,
       info: data,
       bg: "lightblue",
+      classCase: b,
     };
     if (positionX === selected.attr("cx")) {
     } else {
@@ -199,16 +200,14 @@ const CirclePath = ({ d, a, b, sendValue }) => {
 
   const handleMouseLeave = (e) => {
     const selected = d3.select(e.target);
-    console.log(positionY, "xxxx");
+
     if (positionY === selected.attr("cx")) {
-      console.log("leaving same position");
     } else {
       positionY = selected.attr("cx");
-      //sendValue({ opacity: false });
-      console.log("leave to a new", positionY, selected.attr("cx"));
+      // sendValue({ opacity: false });
     }
   };
-  return d.map((item, i) => (
+  return d.slice().map((item, i) => (
     <Circle
       key={item.id}
       hh={(e) => handleMouseOver(e, item)}
@@ -217,9 +216,20 @@ const CirclePath = ({ d, a, b, sendValue }) => {
       cy={
         yScale(item[b]) > gh ? Math.abs(gh - yScale(item[b])) : yScale(item[b])
       }
-      r={10} //i === 0 ? 5 : i * 3
+      r={i === 0 ? 5 : i * 3}
       fill={item.fill}
-    />
+    >
+      <title
+        x={xScale(item[a])}
+        y={
+          yScale(item[b]) > gh
+            ? Math.abs(gh - yScale(item[b]))
+            : yScale(item[b])
+        }
+      >
+        Feels
+      </title>
+    </Circle>
   ));
 };
 const LastText = ({ d, a, b }) => {
@@ -244,13 +254,7 @@ const ToolBar = ({ tools }) => {
             <b>{tools.info.addedon.toDateString()}</b>
           </Ptip>
           <Ptip>
-            Fatalties: <b>{tools.info.fatalties}</b>
-          </Ptip>
-          <Ptip>
-            Seriously Injured: <b>{tools.info.seriouslyInjured}</b>
-          </Ptip>
-          <Ptip>
-            Slightly Injured: <b>{tools.info.slightlyInjured}</b>
+            {tools.classCase} <b>{tools.info[tools.classCase]}</b>
           </Ptip>
         </>
       ) : null}

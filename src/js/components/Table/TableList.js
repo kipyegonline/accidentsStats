@@ -24,7 +24,7 @@ TableList.propTypes = {
 export const TableBody = ({ name, classlist, yoda, sendValue }) => {
   //get the object property name
   const objectClass = Object.entries(yoda).find((item) => item[1] === name);
-
+  let classCase = objectClass[0];
   //concatenate the object name, victim class and yearif
   if (objectClass) {
     classlist = `${classlist}-${objectClass[0]}-${new Date(
@@ -39,8 +39,10 @@ export const TableBody = ({ name, classlist, yoda, sendValue }) => {
 
     if (year == getYear()) {
       //send them up
-      getTableData(e, otherEl);
-      sendValue(e.target.getBoundingClientRect(), e);
+      const details = getTableData(e, otherEl);
+      details.classCase = classCase;
+      sendValue(details);
+      //console.log(details, classCase);
     }
 
     e.target.classList.add("purple");
@@ -58,6 +60,7 @@ export const TableBody = ({ name, classlist, yoda, sendValue }) => {
     //also remove  style from  the other table
     otherEl.classList.remove("purple");
     otherEl.style.color = "";
+    //sendValue({});
   };
   return (
     <td
@@ -84,14 +87,14 @@ TableBody.propTypes = {
     addedon: PropTypes.string,
   }).isRequired,
 };
-export const TableFoot = ({ data, a }) => {
+export const TableFoot = ({ data, a, sendValue }) => {
   const classSelect = "summary_" + a + "_" + getYear(data[0]["addedon"]);
   const handleMouseEnter = (e, data) => {
     let year = getYear(data[0]["addedon"]);
     const el = hoverControl(e);
     if (year == getYear()) {
       //send them up
-      getTableData(e, el);
+      sendValue(getTableData(e, el));
     }
     //perform UI duties
     e.target.classList.add("purple");
@@ -119,6 +122,7 @@ export const TableFoot = ({ data, a }) => {
 TableFoot.propTypes = {
   data: PropTypes.array,
   a: PropTypes.string.isRequired,
+  sendValue: PropTypes.func,
 };
 export const TableHeader = ({ name }) => {
   let header = "";
@@ -183,14 +187,19 @@ function hoverControl(el) {
 }
 
 function getTableData(event, otherTable) {
-  const variance =
-    Number(event.target.textContent) - Number(otherTable.textContent);
+  let en = event.target.textContent,
+    eon = otherTable.textContent;
+  //check for commas in betwreen numbers
+  en = en.indexOf(",") === -1 ? en : en.split(",").join("");
+  eon = eon.indexOf(",") === -1 ? eon : eon.split(",").join("");
+  const variance = Number(en) - Number(eon);
   const tdetails = {
-    lastyear: +otherTable.textContent,
-    thismonth: +event.target.textContent,
+    lastyear: +eon,
+    thismonth: +en,
     variance,
-    pervariance: (variance / +otherTable.textContent) * 100,
+    pervariance: (variance / +eon) * 100,
     dims: event.target.getBoundingClientRect(),
   };
-  // console.log("T tails", tdetails);
+
+  return tdetails;
 }

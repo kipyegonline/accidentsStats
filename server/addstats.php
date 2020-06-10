@@ -19,6 +19,7 @@ $query="SELECT COUNT(*) FROM $table WHERE addedOn='{$date}' and fatal={$fataliti
          $res["msg"]="It seems you're trying to add duplicate information.Please check dates and try again";
         $res["status"]=201;
          echo json_encode($res);
+         exit;
     }else{
         //if no duplicates
         //and everything is present, atleast
@@ -48,6 +49,33 @@ echo json_encode($res);
      }
   
  
+}//GET
+
+//INSERT FROM WHOLE TABLE
+if(isset($_GET["tablestats"]) && $_GET["tablestats"]=="true" ){
+   
+    $vClass=$_POST["classv"];
+    $year=$_POST["year"];
+    $seriousInjuries=isset($_POST["seriousInjuries"]) ? $_POST["seriousInjuries"] : null;
+    $slightInjuries=isset($_POST["slightInjuries"]) ?$_POST["slightInjuries"] : null;
+    $fatalties=isset($_POST["fatalities"]) ? $_POST["fatalities"] : null;
+    $date=$_POST["date"];
+    //fix date for mysql
+    
+   // $de=explode("/",$date);
+   // $date=$de[2]."/".$de[0]."/".$de[1];
+    
+    $table="victimsTrials";
+if(!empty($seriousInjuries) && !empty($slightInjuries) && !empty($fatalties)){
+insertStats($table,$vClass,$fatalties,$seriousInjuries,$slightInjuries,$date,$year);
+}else{
+    $res=[];
+    $res["status"]=201;
+    $res["msg"]="Some fields are missing.Kindly add them.";
+    echo json_encode($res);
+}
+
+
 }//GET
 function insertStats($table,$vClass,$fatalties,$seriousInjuries,$slightInjuries,$date,$year){
     global $connection;
@@ -85,14 +113,14 @@ $res["msg"]="Statistics  added successfully";
 
 }else{
 $res["status"]=201;
-$res["msg"]="Error adding stats,check your network connection and try again.";
+$res["msg"]="Error adding stats,check your network connection and try again. $date";
 
 }
 echo json_encode($res);
 }//stm if
 }
 catch(PDOException $e){
- echo "Error inserting info " . $e.getMessage();
+ echo "Error inserting info " . $e->getMessage();
 }
 
 
@@ -137,8 +165,9 @@ return false;
 }
 
    
-     
+    
     
 }
+
 
 ?>

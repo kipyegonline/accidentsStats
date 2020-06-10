@@ -331,7 +331,7 @@ export const ToolTip = styled.div`
   text-transform: capitalize;
   position: absolute;
   padding: 1rem;
-  margin: ${(props) => console.log("daigle", props.tools)};
+  margin: 0;
   line-height: 1em;
   top: ${(props) => (props.tools !== undefined ? props.tools.top : 0)}px;
   left: ${(props) => (props.tools !== undefined ? props.tools.left : 0)}px;

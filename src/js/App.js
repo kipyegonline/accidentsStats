@@ -15,6 +15,7 @@ import NTSAPie from "./components/Pie/Pie";
 import NTSALine from "./components/Line/Line";
 import NotFound from "./components/UI/NotFound";
 import AddStats from "./components/AddStats/addstats";
+import AddStatsTable from "./components/AddStats/addStatsTable";
 import { store } from "./redux/store";
 import Login from "./components/auth/login";
 import SignUp from "./components/auth/signup";
@@ -30,8 +31,8 @@ const fetchData = async (url, type) => {
   if (res.status) {
     const data = await res.json();
     if (data) {
-      store.dispatch({ type, payload: data });
-      localStorage.setItem(type, JSON.stringify(res));
+      //store.dispatch({ type, payload: data });
+      localStorage.setItem(type, JSON.stringify(data));
     } else {
       console.error("Error fetching data from the server", res);
     }
@@ -47,7 +48,7 @@ function App() {
             <Route exact path="/" component={NTSAPie} />
             <Route path="/timeline" component={NTSALine} />
             <Route path="/summary-statistics" component={Main} />
-            <Route path="/add-stats" component={AddStats} />
+            <Route path="/add-stats" component={AddStatsTable} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route component={NotFound} />
@@ -81,7 +82,7 @@ $.ajax({
   url: url1,
   dataType: "json",
 })
-  .then((res) => console.log(res, "resss"))
+  .then((res) => console.log("resssfixed"))
   .catch((err) => console.error("errr", err));
 
 //check if logged in

@@ -2,7 +2,7 @@ import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Container } from "reactstrap";
 import Nav from "./Nav";
-
+import Footer from "./footer";
 const MainDiv = styled.div.attrs((props) => ({ className: props.classlist }))`
   background: #ccc;
   line-height: 1em;
@@ -10,15 +10,15 @@ const MainDiv = styled.div.attrs((props) => ({ className: props.classlist }))`
 const Global = createGlobalStyle`
 html{
 box-sizing:border-box;
-background:#fff;
+background:#ccc;
 font-size:16px;
 }
 body{
     width:100%;    
     background:#ccc;
     padding:1rem;
-    margin:1rem auto;
-    border:1px solid red;
+    margin:.5rem auto;  
+    height:100%;  
     font-size:1rem;
     line-height:1em;
     font-family:raleway,helvetica;
@@ -35,8 +35,8 @@ align-items:center;
 background:#ddd;
 }
 .purple{
-  font-size:2rem;
-  transition:all .25s linear;
+  font-size:1.5rem;
+  transition:all .2s linear;
   text-align:center;
 }
 
@@ -47,6 +47,7 @@ position:relative;
 circle{
   opacity:1;
 }
+td, tfoot {transition:all .25s linear;}
 circle:hover{
   mouse:pointer;
   opacity:1;
@@ -76,10 +77,11 @@ align-items:center;
 
 export default function Layout({ children }) {
   return (
-    <Container>
+    <Container fluid>
       <Nav />
       <Global />
       {children}
+      <Footer />
     </Container>
   );
 }
