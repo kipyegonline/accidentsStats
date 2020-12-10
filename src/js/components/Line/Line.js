@@ -72,6 +72,7 @@ function NTSALine() {
               d="lygrp"
               a={"addedon"}
               b={selectedClass}
+              year={new Date().getFullYear()}
             />
           ) : (
             <p>Loading Chart</p>
@@ -86,6 +87,7 @@ function NTSALine() {
               d="l2ygrp"
               a={"addedon"}
               b={selectedClass}
+              year={new Date().getFullYear() - 1}
             />
           ) : (
             <p>Loading</p>

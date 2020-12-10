@@ -30,7 +30,7 @@ const xaxis = d3.axisBottom(xScale).ticks(10); //.tickFormat(d => new Date(d).to
 //grid lines
 const gridlines = () => d3.axisLeft(yScale);
 
-export default function lineChart({ datam, a, b, c, d }) {
+export default function lineChart({ datam, a, b, c, d, year }) {
   const [tools, setTools] = useState({});
   const getValue = (data) => setTools(data);
   const cleanData = (data) =>
@@ -105,7 +105,7 @@ export default function lineChart({ datam, a, b, c, d }) {
           <Group gw={gw} x={60} y={20} gh={gh}>
             {/**Year label */}
             <Text x={gw / 2} y={10} fill="black">
-              {2020}
+              {year}
             </Text>
 
             <Group y={0} x={0}>
